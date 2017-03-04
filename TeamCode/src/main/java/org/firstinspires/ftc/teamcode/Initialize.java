@@ -5,9 +5,11 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 //import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-/**
- * Created by Aimee on 3/3/2017.
- */
+/*
+PURPOSE:
+    Define initialization.
+    (Separated from commands to allow OpMode to be passed to Commands class.)
+*/
 
 public class Initialize extends LinearOpMode
 {
@@ -27,6 +29,8 @@ public class Initialize extends LinearOpMode
 
     public void InitializeHW(Hardware robot)
     {
+        //runtime.reset();
+
         telemetry.addData("InitializeHW", "Beginning HW Initialization...");
         telemetry.update();
 

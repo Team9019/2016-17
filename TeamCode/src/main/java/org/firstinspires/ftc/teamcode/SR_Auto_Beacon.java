@@ -20,7 +20,7 @@ FUNCTION:
         Stop
  */
 
-@Autonomous(name="Beacon (Encoders)", group="Autonomous")
+@Autonomous(name="3 Beacon (Encoders)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);

@@ -181,18 +181,14 @@ public class Commands extends LinearOpMode
         telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
         telemetry.update();
 
-        telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
-        telemetry.update();
-
         //System.out.println(Configuration.COUNTS_PER_INCH);
+        //System.out.println(opModeIsActive());
+        //System.out.println(opMode.opModeIsActive());
 
         //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        //System.out.println(opModeIsActive());
-        //System.out.println(opMode.opModeIsActive());
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -209,6 +205,8 @@ public class Commands extends LinearOpMode
             robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
             robot.motorBackRight.setTargetPosition(newRightBackTarget);
 
+            telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
+            telemetry.update();
             sleep(3000);
 
             // Turn On RUN_TO_POSITION
@@ -273,6 +271,7 @@ public class Commands extends LinearOpMode
 
         if (opMode.opModeIsActive())
         {
+            runtime.reset();
             robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
             runtime.reset();
@@ -327,8 +326,6 @@ public class Commands extends LinearOpMode
         robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
         robot.motorBackRight.setTargetPosition(newRightBackTarget);
 
-        sleep(3000);
-
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -337,6 +334,10 @@ public class Commands extends LinearOpMode
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
         {
+            telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
+            telemetry.update();
+            sleep(3000);
+
             // start motion.
             runtime.reset();
             speed = Range.clip(Math.abs(speed), 0.0, 1.0);
@@ -480,11 +481,15 @@ public class Commands extends LinearOpMode
     public void GyroHold(Hardware robot, double speed, double angle, double holdTime)
     {
 
-        ElapsedTime holdTimer = new ElapsedTime();
+        //ElapsedTime holdTimer = new ElapsedTime();
 
         // keep looping while we have time remaining.
-        holdTimer.reset();
-        while (opMode.opModeIsActive() && (holdTimer.time() < holdTime))
+        //holdTimer.reset();
+        runtime.reset();
+
+        while ( opMode.opModeIsActive() &&
+                //(holdTimer.time() < holdTime))
+                (runtime.seconds() < holdTime))
         {
             // Update telemetry & Allow time for other processes to run.
             onHeading(robot, speed, angle, Configuration.P_TURN_COEFF);
@@ -525,6 +530,7 @@ public class Commands extends LinearOpMode
 
         runtime.reset();
 
+        //temporary loop (15 seconds) to test beacon
         while ( opMode.opModeIsActive() &&
                 runtime.seconds() < 15)
         {

@@ -28,7 +28,7 @@ public class Configuration
     //*****************************************
     //Motor Power
         public static double DRIVE_POWER = 0.6;
-        public static double TURN_POWER = 0.2;
+        public static double TURN_POWER = 0.5;
         public static double LAUNCH_POWER = 0.55;
         public static double APPROACH_SPEED = 0.25;
 
@@ -44,14 +44,14 @@ public class Configuration
         public static int LAUNCH_TIME = 5000;
 
     //Measurement Settings
-        public static double LONG_DIST_TO_SHOOT =10.0;
-        public static double SHORT_DIST_TO_SHOOT =0.0;
-        public static double LONG_DIST_TO_PARK = 72.0;
-        public static double SHORT_DIST_TO_PARK =60.0;
-        public static double LONG_FIRST_BEACON_AIM_DIST =66.0;
-        public static double SHORT_FIRST_BEACON_AIM_DIST =20.0;
-        public static double LONG_FIRST_BEACON_DIST =20.0;
-        public static double SHORT_FIRST_BEACON_DIST =20.0;
+        public static double LONG_DIST_TO_SHOOT =10.0;          //Inches to drive from LONG start position before shooting ball
+        public static double SHORT_DIST_TO_SHOOT =0.0;          //Inches to drive from SHORT start position before shooting ball
+        public static double LONG_DIST_TO_PARK = 72.0;          //Inches to drive from after shooting when starting in LONG position
+        public static double SHORT_DIST_TO_PARK =60.0;          //Inches to drive from after shooting when starting in SHORT position
+        public static double LONG_FIRST_BEACON_AIM_DIST =66.0;  //Inches from LONG shooter position to beacon turn
+        public static double SHORT_FIRST_BEACON_AIM_DIST =60.0; //Inches from SHORT shooter position to beacon turn
+        public static double LONG_FIRST_BEACON_DIST = 40.0;      //Inches from LONG turn position to beacon
+        public static double SHORT_FIRST_BEACON_DIST =40.0;     //Inches from SHORT turn position to beacon
 
     //*****************************************
     //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
@@ -59,6 +59,7 @@ public class Configuration
         public static double FORTYFIVE_DEGREE_TURN_INCHES = 10.0;
         public static double NINETY_DEGREE_TURN_INCHES = 20.0;
 
+        //COUNTS_PER_INCH is calculated here with a default, but is is being overridden by a phone setting.
         private static double COUNTS_PER_MOTOR_REV = 1120;
         private static double DRIVE_GEAR_REDUCTION = 0.39;
         private static double WHEEL_DIAMETER_INCHES = 4.0;

@@ -20,8 +20,8 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="Beacon (Gyro)", group="Autonomous")
-//@Disabled
+@Autonomous(name="4 Beacon (Gyro)", group="Autonomous")
+@Disabled
 class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);

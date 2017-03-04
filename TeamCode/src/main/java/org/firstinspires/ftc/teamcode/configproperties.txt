@@ -1,7 +1,7 @@
 ALLIANCE = RED
 START_POSITION = LONG
 DRIVE_POWER = 0.6
-TURN_POWER = 0.4
+TURN_POWER = 0.5
 LAUNCH_POWER = 0.55
 APPROACH_SPEED = 0.25
 CLOSED_LIFT_SERVO_POS = 1.0
@@ -15,9 +15,9 @@ SHORT_DIST_TO_SHOOT = 0.0
 LONG_DIST_TO_PARK = 72.0
 SHORT_DIST_TO_PARK = 60.0
 LONG_FIRST_BEACON_AIM_DIST = 66.0
-SHORT_FIRST_BEACON_AIM_DIST = 20.0
-LONG_FIRST_BEACON_DIST = 20.0
-SHORT_FIRST_BEACON_DIST = 20.0
+SHORT_FIRST_BEACON_AIM_DIST = 60.0
+LONG_FIRST_BEACON_DIST = 40.0
+SHORT_FIRST_BEACON_DIST = 40.0
 COUNTS_PER_INCH = 34.0
 
 #ALLIANCE:              RED or BLUE
@@ -33,12 +33,12 @@ COUNTS_PER_INCH = 34.0
 
 #AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
 #LAUNCH_TIME            Motor-tim:  Time to power motor to launch ball
-#LONG_DIST_TO_SHOOT     Distance:   Inches to drive from LONG position before shooting ball
-#SHORT_DIST_TO_SHOOT    Distance:   Inches to drive from SHORT position before shooting ball
+#LONG_DIST_TO_SHOOT     Distance:   Inches to drive from LONG start position before shooting ball
+#SHORT_DIST_TO_SHOOT    Distance:   Inches to drive from SHORT start position before shooting ball
 #LONG_DIST_TO_PARK      Distance:   Inches to drive from after shooting when starting in LONG position
 #SHORT_DIST_TO_PARK     Distance:   Inches to drive from after shooting when starting in SHORT position
 #LONG_FIRST_BEACON_AIM_DIST Distance:   Inches from LONG shooter position to beacon turn
 #SHORT FIRST_BEACON_AIM_DIST Distance:   Inches from SHORT shooter position to beacon turn
-#LONG_FIRST_BEACON_DIST     Distance:   Inches from LONG turn positio to beacon
-#SHORT_FIRST_BEACON_DIST    Distance:   Inches from SHORT turn positio to beacon
+#LONG_FIRST_BEACON_DIST     Distance:   Inches from LONG turn position to beacon
+#SHORT_FIRST_BEACON_DIST    Distance:   Inches from SHORT turn position to beacon
 #COUNTS_PER_INCH        Measure:  Counts per inch

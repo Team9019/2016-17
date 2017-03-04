@@ -20,7 +20,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="All Gyro", group="Autonomous")
+@Autonomous(name="5 All Gyro", group="Autonomous")
 @Disabled
 public class SR_Auto_Whole_Enchilada extends LinearOpMode
 {
