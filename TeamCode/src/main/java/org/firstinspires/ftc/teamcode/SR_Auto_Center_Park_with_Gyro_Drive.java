@@ -82,6 +82,7 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         else //SHORT
         {
             cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 6, 0, 5.0);
         }
 
         cmds.StopDriving(robot);
