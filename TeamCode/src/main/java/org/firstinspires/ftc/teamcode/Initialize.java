@@ -74,10 +74,10 @@ public class Initialize extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 
-        robot.motorFrontLeft.setMaxSpeed(100);
-        robot.motorFrontRight.setMaxSpeed(100);
-        robot.motorBackLeft.setMaxSpeed(100);
-        robot.motorBackRight.setMaxSpeed(100);
+        robot.motorFrontLeft.setMaxSpeed(1000);
+        robot.motorFrontRight.setMaxSpeed(1000);
+        robot.motorBackLeft.setMaxSpeed(1000);
+        robot.motorBackRight.setMaxSpeed(1000);
 
         //telemetry.addData
         //        ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
