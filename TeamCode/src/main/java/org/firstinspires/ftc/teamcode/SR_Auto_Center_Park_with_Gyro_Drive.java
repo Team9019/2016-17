@@ -17,7 +17,7 @@ FUNCTION:
 */
 
 @Autonomous(name="2 Center Park (Gyro)", group="Autonomous")
-@Disabled
+//@Disabled
 public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
@@ -66,7 +66,7 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
-        sleep(500);
+        sleep(2000);
 
         robot.motorCollect.setPower(1.0);
 
