@@ -238,10 +238,10 @@ public class Commands extends LinearOpMode
             // keep looping while we are still active, and there is time left, and both motors are running.
             while ( opMode.opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
-                    //robot.motorFrontLeft.isBusy() &&
-                    //robot.motorFrontRight.isBusy() //&&
-                    robot.motorBackLeft.isBusy() &&
-                    robot.motorBackRight.isBusy()
+                    robot.motorFrontLeft.isBusy() &&
+                    robot.motorFrontRight.isBusy() //&&
+                    //robot.motorBackLeft.isBusy() &&
+                    //robot.motorBackRight.isBusy()
                     )
             {
                 // Display final position  for the driver.
