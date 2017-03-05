@@ -12,7 +12,6 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /*
 PURPOSE:
     Define all movement commands
-    
 */
 
 public class Commands extends LinearOpMode
