@@ -21,7 +21,7 @@ FUNCTION:
  */
 
 @Autonomous(name="3 Beacon (Encoders)", group="Autonomous")
-//@Disabled
+@Disabled
 public class SR_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);

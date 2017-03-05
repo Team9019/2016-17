@@ -17,7 +17,7 @@ FUNCTION:
 */
 
 @Autonomous(name="2 Center Park (Gyro)", group="Autonomous")
-//@Disabled
+@Disabled
 public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
