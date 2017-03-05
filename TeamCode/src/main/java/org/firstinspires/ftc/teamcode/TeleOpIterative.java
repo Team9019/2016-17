@@ -107,12 +107,12 @@ public class TeleOpIterative extends OpMode
         if (gamepad1.right_bumper)
         {
             robot.servoLift.setPosition(Configuration.OPEN_LIFT_SERVO_POS);
-            //robot.servoLift.setPosition(Configuration.OPEN_TUSK_SERVO_POS);
+            robot.servoTusk.setPosition(Configuration.OPEN_TUSK_SERVO_POS);
         }
         else
         {
             robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
-            //robot.servoLift.setPosition(Configuration.CLOSED_TUSK_SERVO_POS);
+            robot.servoTusk.setPosition(Configuration.CLOSED_TUSK_SERVO_POS);
         }
 
         //Alternate driver
