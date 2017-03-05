@@ -61,7 +61,7 @@ class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
-        sleep(500);
+        sleep(2000);
 
         robot.motorCollect.setPower(1.0);
 
