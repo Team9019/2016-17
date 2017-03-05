@@ -73,7 +73,7 @@ public class Hardware
 
         // Define Servos
             servoLift = hwMap.servo.get("fork");
-            //servoTusk = hwMap.servo.get("tusk");
+            servoTusk = hwMap.servo.get("tusk");
 
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
