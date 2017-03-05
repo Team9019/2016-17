@@ -38,8 +38,8 @@ public class TEST_Distance extends LinearOpMode
         //***** Place test command here *****
 
             //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, Configuration.LONG_DIST_TO_SHOOT, 5.0);
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 70, 70, 5.0);
-            //cmds.SenseBeacon(robot);
+            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 70, 70, 5.0);
+            cmds.SenseBeacon(robot);
 
         //***********************************
 
