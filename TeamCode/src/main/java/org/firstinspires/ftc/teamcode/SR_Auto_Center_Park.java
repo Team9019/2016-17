@@ -15,7 +15,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="1 Center Park (Encoders)", group="Autonomous")
+@Autonomous(name="1 Center Park (Req. SHORT/LONG)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Center_Park extends LinearOpMode
 {
