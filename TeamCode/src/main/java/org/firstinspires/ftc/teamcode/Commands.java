@@ -185,10 +185,19 @@ public class Commands extends LinearOpMode
         //System.out.println(opModeIsActive());
         //System.out.println(opMode.opModeIsActive());
 
-        //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        // Display current position
+        telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :%7d",
+                robot.motorFrontLeft.getCurrentPosition(),
+                robot.motorFrontRight.getCurrentPosition(),
+                robot.motorBackLeft.getCurrentPosition(),
+                robot.motorBackRight.getCurrentPosition());
+        telemetry.update();
+        sleep(3000);
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -199,15 +208,18 @@ public class Commands extends LinearOpMode
             newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
             newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * Configuration.COUNTS_PER_INCH);
 
+            //Display target positions
+            telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
+                   newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
+            telemetry.update();
+            sleep(3000);
+
             // Pass target position to motor controller
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
             robot.motorFrontRight.setTargetPosition(newRightFrontTarget);
             robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
             robot.motorBackRight.setTargetPosition(newRightBackTarget);
 
-            telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
-            telemetry.update();
-            sleep(3000);
 
             // Turn On RUN_TO_POSITION
             robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -232,7 +244,7 @@ public class Commands extends LinearOpMode
                     //robot.motorBackRight.isBusy()
                     )
             {
-                // Display it for the driver.
+                // Display final position  for the driver.
                 telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :%7d",
                         robot.motorFrontLeft.getCurrentPosition(),
                         robot.motorFrontRight.getCurrentPosition(),
@@ -241,6 +253,7 @@ public class Commands extends LinearOpMode
                 telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                         newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
                 telemetry.update();
+                sleep(3000);
             }
 
             // Stop all motion;
@@ -258,7 +271,7 @@ public class Commands extends LinearOpMode
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            //idle();   // optional pause after each move
+            idle();   // optional pause after each move
         }
         telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
         telemetry.update();
@@ -334,9 +347,9 @@ public class Commands extends LinearOpMode
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
         {
-            telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
-            telemetry.update();
-            sleep(3000);
+            //telemetry.addData("Debug", "Count:  " + Configuration.COUNTS_PER_INCH);
+            //telemetry.update();
+            //sleep(1000);
 
             // start motion.
             runtime.reset();
@@ -349,10 +362,10 @@ public class Commands extends LinearOpMode
             // keep looping while we are still active, and BOTH motors are running.
             while (opMode.opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
-                    robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() //&&
-                    //robot.motorBackLeft.isBusy() &&
-                    //robot.motorBackRight.isBusy()
+                    //robot.motorFrontLeft.isBusy() &&
+                    //robot.motorFrontRight.isBusy() &&
+                    robot.motorBackLeft.isBusy() &&
+                    robot.motorBackRight.isBusy()
                     )
             {
                 // adjust relative speed based on heading error.
