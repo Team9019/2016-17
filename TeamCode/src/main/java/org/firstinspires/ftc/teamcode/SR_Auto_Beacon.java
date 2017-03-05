@@ -69,7 +69,7 @@ public class SR_Auto_Beacon extends LinearOpMode {
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
-        sleep(500);
+        sleep(2000);
 
         robot.motorCollect.setPower(1.0);
 
@@ -91,11 +91,11 @@ public class SR_Auto_Beacon extends LinearOpMode {
         //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 5.0);
+            cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES +1.5 , 5.0);
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 5.0);
+            cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.FORTYFIVE_DEGREE_TURN_INCHES +1.5, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 5.0);
         }
 
         //Drive into beacon, pressing button
