@@ -13,7 +13,7 @@ FUNCTION:
         Drive within shooting distance
         Shoot ball(s)
         Drive to align with first beacon
-        Turn 45% to aim to beacon
+        Turn 45 degrees to aim to beacon
         Drive into beacon
         <back up 3 inches>
         <sense beacon, taking action, based on result>
