@@ -33,11 +33,11 @@ public class Configuration
         public static double APPROACH_SPEED = 0.25;
 
     //Servo Positions
-        public static double CLOSED_LIFT_SERVO_POS = 1.0;
-        public static double OPEN_LIFT_SERVO_POS = 0.4;
+        public static double CLOSED_LIFT_SERVO_POS = 0.0;
+        public static double OPEN_LIFT_SERVO_POS = 1.0;
 
         public static double CLOSED_TUSK_SERVO_POS = 1.0;
-        public static double OPEN_TUSK_SERVO_POS = 0.4;
+        public static double OPEN_TUSK_SERVO_POS = 0.0;
 
     //Time Settings
         public static int AUTO_DELAY_TIME = 0;
@@ -46,11 +46,11 @@ public class Configuration
     //Measurement Settings
         public static double LONG_DIST_TO_SHOOT =10.0;          //Inches to drive from LONG start position before shooting ball
         public static double SHORT_DIST_TO_SHOOT =0.0;          //Inches to drive from SHORT start position before shooting ball
-        public static double LONG_DIST_TO_PARK = 72.0;          //Inches to drive from after shooting when starting in LONG position
-        public static double SHORT_DIST_TO_PARK =60.0;          //Inches to drive from after shooting when starting in SHORT position
+        public static double LONG_DIST_TO_PARK = 62.0;          //Inches to drive from after shooting when starting in LONG position
+        public static double SHORT_DIST_TO_PARK =43.0;          //Inches to drive from after shooting when starting in SHORT position
         public static double LONG_FIRST_BEACON_AIM_DIST =66.0;  //Inches from LONG shooter position to beacon turn
         public static double SHORT_FIRST_BEACON_AIM_DIST =60.0; //Inches from SHORT shooter position to beacon turn
-        public static double LONG_FIRST_BEACON_DIST = 40.0;      //Inches from LONG turn position to beacon
+        public static double LONG_FIRST_BEACON_DIST = 50.0;      //Inches from LONG turn position to beacon
         public static double SHORT_FIRST_BEACON_DIST =40.0;     //Inches from SHORT turn position to beacon
 
     //*****************************************
