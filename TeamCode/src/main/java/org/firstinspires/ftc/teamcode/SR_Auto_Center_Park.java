@@ -67,7 +67,7 @@ public class SR_Auto_Center_Park extends LinearOpMode
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
-        sleep(500);
+        sleep(2000);
 
         robot.motorCollect.setPower(1.0);
 
@@ -83,6 +83,7 @@ public class SR_Auto_Center_Park extends LinearOpMode
         else
         {
             cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, Configuration.SHORT_DIST_TO_PARK, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
         }
 
         cmds.StopDriving(robot);
