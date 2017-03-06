@@ -47,19 +47,19 @@ public class Commands extends LinearOpMode
         //System.out.println(opModeIsActive());
         //System.out.println(opMode.opModeIsActive());
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Display start position
-        ////telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
-        //        robot.motorFrontLeft.getCurrentPosition(),
-        //        robot.motorFrontRight.getCurrentPosition(),
-        //        robot.motorBackLeft.getCurrentPosition(),
-        //        robot.motorBackRight.getCurrentPosition());
-        //telemetry.update();
-        //sleep(2000);
+        telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
+                robot.motorFrontLeft.getCurrentPosition(),
+                robot.motorFrontRight.getCurrentPosition(),
+                robot.motorBackLeft.getCurrentPosition(),
+                robot.motorBackRight.getCurrentPosition());
+        telemetry.update();
+        sleep(1500);
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -74,7 +74,7 @@ public class Commands extends LinearOpMode
             telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                    newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
             telemetry.update();
-            sleep(2000);
+            sleep(1500);
 
             // Pass target position to motor controller
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
@@ -100,9 +100,9 @@ public class Commands extends LinearOpMode
             while ( opMode.opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() &&
-                    robot.motorBackLeft.isBusy() &&
-                    robot.motorBackRight.isBusy()
+                    robot.motorFrontRight.isBusy() //&&
+                    //robot.motorBackLeft.isBusy() &&
+                    //robot.motorBackRight.isBusy()
                     )
             {
                 // Display positions for the driver.
@@ -114,25 +114,13 @@ public class Commands extends LinearOpMode
                 telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                         newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
                 telemetry.update();
+
                 //sleep(1000);
+                idle();
             }
 
             // Stop all motion;
             StopDriving(robot);
-
-            //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            //idle();
-
-            // Turn off RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            idle();   // optional pause after each move
 
             // Display current position
             telemetry.addData("EncoderDrive", "> Final position of %7d :%7d :%7d :%7d",
@@ -142,6 +130,19 @@ public class Commands extends LinearOpMode
                     robot.motorBackRight.getCurrentPosition());
             telemetry.update();
             sleep(3000);
+
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            idle();
+
+            // Turn off RUN_TO_POSITION
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //idle();   // optional pause after each move
         }
         telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
         telemetry.update();
@@ -162,6 +163,8 @@ public class Commands extends LinearOpMode
                     runtime.milliseconds() < Configuration.LAUNCH_TIME) {
                 telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
                 telemetry.update();
+
+                idle();
             }
 
             robot.motorLaunch.setPower(0);
@@ -273,6 +276,8 @@ public class Commands extends LinearOpMode
                         newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
                 telemetry.addData("Speed",   "%5.2f:%5.2f",  leftSpeed, rightSpeed);
                 telemetry.update();
+
+                idle();
             }
 
             StopDriving(robot);
@@ -302,6 +307,7 @@ public class Commands extends LinearOpMode
                 !onHeading(robot, speed,angle, Configuration.P_TURN_COEFF))
         {
             telemetry.update();
+            idle();
         }
     }
 
@@ -377,6 +383,7 @@ public class Commands extends LinearOpMode
             // Update telemetry & Allow time for other processes to run.
             onHeading(robot, speed, angle, Configuration.P_TURN_COEFF);
 //            telemetry.update();
+            idle();
         }
 
         StopDriving(robot);
