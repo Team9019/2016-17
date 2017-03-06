@@ -20,7 +20,7 @@ FUNCTION:
         Stop
  */
 
-@Autonomous(name="3 Beacon SHORT (Req. RED/BLUE)", group="Autonomous")
+@Autonomous(name="3 Beacon SHORT (Req. RED/BLUE/DELAY)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Beacon_SHORT extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
@@ -38,7 +38,6 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
 
         configs.loadParameters();
 
-        //cmds.InitializeHW(robot);
         init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
@@ -74,24 +73,14 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
         robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
-        //cmds.Shoot(robot);
 
         robot.motorCollect.setPower(0);
 
-        //Drive to line up with closest beacon
-        //if (Configuration.START_POSITION.equals("LONG"))
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_AIM_DIST, Configuration.LONG_FIRST_BEACON_AIM_DIST, 5.0);
-        //}
-        //else
-        //{
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_AIM_DIST, Configuration.SHORT_FIRST_BEACON_AIM_DIST, 5.0);
-        //}
+        cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_AIM_DIST, Configuration.SHORT_FIRST_BEACON_AIM_DIST, 5.0);
 
         //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            //cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES +1.5 , 5.0);
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES +1.5 , 5.0);
         }
         else    //BLUE
@@ -99,15 +88,7 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES +1.5, -Configuration.NINETY_DEGREE_TURN_INCHES, 5.0);
         }
 
-        //Drive into beacon, pressing button
-        //if (Configuration.START_POSITION.equals("LONG"))
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_DIST, Configuration.LONG_FIRST_BEACON_DIST, 5.0);
-        //}
-        //else
-        //{
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, Configuration.SHORT_FIRST_BEACON_DIST, 5.0);
-        //}
+        cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, Configuration.SHORT_FIRST_BEACON_DIST, 5.0);
 
         //Backup 3 inches to assess color
         //cmds.EncoderDrive(robot,Configuration.APPROACH_SPEED, -3, -3, 5.0);
