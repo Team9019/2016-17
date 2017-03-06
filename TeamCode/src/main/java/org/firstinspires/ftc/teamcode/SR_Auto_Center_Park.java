@@ -15,7 +15,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="1 Center Park (Req. SHORT/LONG)", group="Autonomous")
+@Autonomous(name="2 Center Park (Req. SHORT/LONG/DELAY)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Center_Park extends LinearOpMode
 {
@@ -34,7 +34,6 @@ public class SR_Auto_Center_Park extends LinearOpMode
 
         configs.loadParameters();
 
-        //cmds.InitializeHW(robot);
         init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
@@ -62,8 +61,6 @@ public class SR_Auto_Center_Park extends LinearOpMode
             cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, Configuration.SHORT_DIST_TO_SHOOT, 5.0);
         }
 
-        //sleep(5000);
-
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
@@ -83,7 +80,7 @@ public class SR_Auto_Center_Park extends LinearOpMode
         else
         {
             cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, Configuration.SHORT_DIST_TO_PARK, 5.0);
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
+            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
         }
 
         cmds.StopDriving(robot);
