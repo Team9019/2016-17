@@ -53,13 +53,13 @@ public class Commands extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Display start position
-        telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
-                robot.motorFrontLeft.getCurrentPosition(),
-                robot.motorFrontRight.getCurrentPosition(),
-                robot.motorBackLeft.getCurrentPosition(),
-                robot.motorBackRight.getCurrentPosition());
-        telemetry.update();
-        sleep(2000);
+        ////telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
+        //        robot.motorFrontLeft.getCurrentPosition(),
+        //        robot.motorFrontRight.getCurrentPosition(),
+        //        robot.motorBackLeft.getCurrentPosition(),
+        //        robot.motorBackRight.getCurrentPosition());
+        //telemetry.update();
+        //sleep(2000);
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -74,7 +74,7 @@ public class Commands extends LinearOpMode
             telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                    newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
             telemetry.update();
-            sleep(3000);
+            sleep(2000);
 
             // Pass target position to motor controller
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
