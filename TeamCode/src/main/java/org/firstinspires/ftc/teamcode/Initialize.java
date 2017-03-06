@@ -74,6 +74,11 @@ public class Initialize extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
         robot.motorFrontLeft.setMaxSpeed(3000);
         robot.motorFrontRight.setMaxSpeed(3000);
         robot.motorBackLeft.setMaxSpeed(3000);
@@ -119,8 +124,8 @@ public class Initialize extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors Complete!");
         telemetry.update();
 
-        telemetry.addData("InitializeHW", "> > Initializing Gyro ...");
-        telemetry.update();
+        //telemetry.addData("InitializeHW", "> > Initializing Gyro ...");
+        //telemetry.update();
 
         //int xVal, yVal, zVal = 0;     // Gyro rate Values
         //int heading = 0;              // Gyro integrated heading
@@ -134,24 +139,19 @@ public class Initialize extends LinearOpMode
         // values is a reference to the hsvValues array.
         //final float values[] = hsvValues;
 
-        robot.sensorGyro.calibrate();
+        //robot.sensorGyro.calibrate();
 
         // make sure the gyro is calibrated.
-        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
-        {
-            sleep(50);
-            idle();
-        }
+        //while (!isStopRequested() && robot.sensorGyro.isCalibrating())
+        //{
+        //    sleep(50);
+        //    idle();
+        //}
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.sensorGyro.resetZAxisIntegrator();    //03-01-2017
 
-        robot.sensorGyro.resetZAxisIntegrator();    //03-01-2017
-
-        telemetry.addData("InitializeHW", "> > Initializing Gyro Complete!");
-        telemetry.update();
+        //telemetry.addData("InitializeHW", "> > Initializing Gyro Complete!");
+        //telemetry.update();
 
         telemetry.addData("InitializeHW", "> Initializing Sensors Complete!");
         telemetry.update();
