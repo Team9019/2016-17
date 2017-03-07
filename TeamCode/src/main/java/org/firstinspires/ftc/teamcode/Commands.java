@@ -59,7 +59,7 @@ public class Commands extends LinearOpMode
                 robot.motorBackLeft.getCurrentPosition(),
                 robot.motorBackRight.getCurrentPosition());
         telemetry.update();
-        sleep(1500);
+        //sleep(1500);
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -74,7 +74,7 @@ public class Commands extends LinearOpMode
             telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                    newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
             telemetry.update();
-            sleep(1500);
+            //sleep(1500);
 
             // Pass target position to motor controller
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
@@ -100,9 +100,9 @@ public class Commands extends LinearOpMode
             while ( opMode.opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() //&&
-                    //robot.motorBackLeft.isBusy() &&
-                    //robot.motorBackRight.isBusy()
+                    robot.motorFrontRight.isBusy() &&
+                    robot.motorBackLeft.isBusy() &&
+                    robot.motorBackRight.isBusy()
                     )
             {
                 // Display positions for the driver.
@@ -129,7 +129,7 @@ public class Commands extends LinearOpMode
                     robot.motorBackLeft.getCurrentPosition(),
                     robot.motorBackRight.getCurrentPosition());
             telemetry.update();
-            sleep(3000);
+            ///sleep(3000);
 
             robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -431,50 +431,50 @@ public class Commands extends LinearOpMode
             idle();
         }
 
-//        while ( opMode.opModeIsActive() &&
-//                robot.sensorColor.alpha() < 20 &&
-//                runtime.seconds() < 15)
-//        {
-//            telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-//            telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-//            telemetry.update();
-//
-//            if (robot.sensorColor.red()>=8)
-//            {
-//                telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
-//                telemetry.update();
-//                robot.devIM.setLED(1,true);     //Red
-//                robot.devIM.setLED(0,false);    //Blue
-//
-//                if (Configuration.ALLIANCE.equals("BLUE"))
-//                {
-//                    //wait 6 seconds before determining whether to drive forward again (wrong color)
-//                    sleep(6000);
-//
-//                    // Drive forward 3 inches to bump beacon, then back off
-//                    //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-//                    //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
-//                }
-//            }
-//            else if (robot.sensorColor.blue()<=3)
-//            {
-//                telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
-//                telemetry.update();
-//                robot.devIM.setLED(1,false);     //Red
-//                robot.devIM.setLED(0,true);    //Blue
-//
-//                if (Configuration.ALLIANCE.equals("RED"))
-//                {
-//                    //wait 6 seconds before determining whether to drive forward again (wrong color)
-//                    sleep(6000);
-//
-//                    // Drive forward 3 inches to bump beacon, then back off
-//                    //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-//                    //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
-//                }
-//            }
-//            idle();
-//        }
+        while ( opMode.opModeIsActive() &&
+                robot.sensorColor.alpha() < 20 &&
+                runtime.seconds() < 15)
+        {
+            telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            telemetry.update();
+
+            if (robot.sensorColor.red()>=Configuration.RED_COLOR_LOW && robot.sensorColor.red()<=Configuration.RED_COLOR_HIGH)
+            {
+                telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
+                telemetry.update();
+                robot.devIM.setLED(1,true);     //Red
+                robot.devIM.setLED(0,false);    //Blue
+
+                if (Configuration.ALLIANCE.equals("BLUE"))
+                {
+                    //wait 6 seconds before determining whether to drive forward again (wrong color)
+                    sleep(6000);
+
+                    // Drive forward 3 inches to bump beacon, then back off
+                    EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
+                    EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                }
+            }
+            else if (robot.sensorColor.blue()>=Configuration.BLUE_COLOR_LOW && robot.sensorColor.blue()<=Configuration.BLUE_COLOR_HIGH)
+            {
+                telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
+                telemetry.update();
+                robot.devIM.setLED(1,false);     //Red
+                robot.devIM.setLED(0,true);    //Blue
+
+                if (Configuration.ALLIANCE.equals("RED"))
+                {
+                    //wait 6 seconds before determining whether to drive forward again (wrong color)
+                    sleep(6000);
+
+                    // Drive forward 3 inches to bump beacon, then back off
+                    EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
+                    EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                }
+            }
+            idle();
+        }
 
         telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
         telemetry.update();
