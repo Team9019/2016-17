@@ -19,6 +19,11 @@ LONG_FIRST_BEACON_DIST = 47.0
 SHORT_FIRST_BEACON_AIM_DIST = 52.0
 SHORT_FIRST_BEACON_DIST = 38.0
 COUNTS_PER_INCH = 39.0
+NINETY_DEGREE_TURN_INCHES = 20
+RED_COLOR_LOW = 3
+RED_COLOR_HIGH = 8
+BLUE_COLOR_LOW = 1
+BLUE_COLOR_HIGH = 2
 
 #ALLIANCE:              RED or BLUE
 #START_POSITION:        LONG or SHORT
@@ -41,3 +46,7 @@ COUNTS_PER_INCH = 39.0
 #SHORT FIRST_BEACON_AIM_DIST Distance:   Inches from SHORT shooter position to beacon turn
 #SHORT_FIRST_BEACON_DIST    Distance:   Inches from SHORT turn position to beacon
 #COUNTS_PER_INCH        Measure:  Counts per inch
+#RED_COLOR_LOW          Color:  Red range low
+#RED_COLOR_HIGH         Color:  Red range high
+#BLUE_COLOR_LOW         Color:  Blue range low
+#BLUE_COLOR_HIGH        Color:  Blue range high
