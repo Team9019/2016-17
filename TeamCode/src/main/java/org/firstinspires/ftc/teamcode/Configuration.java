@@ -53,11 +53,17 @@ public class Configuration
         public static double LONG_FIRST_BEACON_DIST = 50.0;      //Inches from LONG turn position to beacon
         public static double SHORT_FIRST_BEACON_DIST =40.0;     //Inches from SHORT turn position to beacon
 
+        public static double NINETY_DEGREE_TURN_INCHES = 20.0;
+
+        public static int RED_COLOR_LOW = 3;
+        public static int RED_COLOR_HIGH = 8;
+        public static int BLUE_COLOR_LOW = 1;
+        public static int BLUE_COLOR_HIGH = 2;
+
     //*****************************************
     //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
     //*****************************************
-        public static double FORTYFIVE_DEGREE_TURN_INCHES = 10.0;
-        public static double NINETY_DEGREE_TURN_INCHES = 20.0;
+        public static double FORTYFIVE_DEGREE_TURN_INCHES = NINETY_DEGREE_TURN_INCHES / 2;
 
         //COUNTS_PER_INCH is calculated here with a default, but is is being overridden by a phone setting.
         private static double COUNTS_PER_MOTOR_REV = 1120;
@@ -119,6 +125,12 @@ public class Configuration
             SHORT_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_DIST"));
 
             COUNTS_PER_INCH = Double.parseDouble(properties.getProperty("COUNTS_PER_INCH"));
+            NINETY_DEGREE_TURN_INCHES = Double.parseDouble(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
+
+            RED_COLOR_LOW = Integer.parseInt(properties.getProperty("RED_COLOR_LOW"));
+            RED_COLOR_HIGH = Integer.parseInt(properties.getProperty("RED_COLOR_HIGH"));
+            BLUE_COLOR_LOW = Integer.parseInt(properties.getProperty("BLUE_COLOR_LOW"));
+            BLUE_COLOR_HIGH = Integer.parseInt(properties.getProperty("BLUE_COLOR_HIGH"));
 
             in.close();
         }
