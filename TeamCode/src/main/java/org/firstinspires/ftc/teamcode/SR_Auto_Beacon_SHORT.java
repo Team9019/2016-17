@@ -96,32 +96,6 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
         cmds.SenseBeacon(robot);
 
-        //Turn 90 degrees to drive to second beacon
-        //if(Configuration.ALLIANCE.equals("RED"))
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
-        //}
-        //else    //BLUE
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
-        //}
-
-        //Drive to second beacon
-        //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
-
-        //Turn 90 degrees to face beacon
-        //if(Configuration.ALLIANCE.equals("RED"))
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
-        //}
-        //else    //BLUE
-        //{
-        //    cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
-        //}
-
-        //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
-//        cmds.SenseBeacon(robot);
-
         cmds.StopDriving(robot);
 
         telemetry.addData("Status", "Autonomous Complete!");
