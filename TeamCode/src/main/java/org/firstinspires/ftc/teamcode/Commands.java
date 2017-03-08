@@ -405,6 +405,8 @@ public class Commands extends LinearOpMode
 
     public void SenseBeacon(Hardware robot)
     {
+        boolean Searching=true;
+
         telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
         telemetry.update();
 
@@ -433,7 +435,8 @@ public class Commands extends LinearOpMode
 
         while ( opMode.opModeIsActive() &&
                 robot.sensorColor.alpha() < 20 &&
-                runtime.seconds() < 15
+                runtime.seconds() < 13
+                && Searching
                 )
         {
             telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
@@ -456,6 +459,10 @@ public class Commands extends LinearOpMode
                     EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
                     EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
                 }
+                else
+                {
+                    Searching= false;
+                }
             }
             else if (robot.sensorColor.blue()>=Configuration.BLUE_COLOR_LOW && robot.sensorColor.blue()<=Configuration.BLUE_COLOR_HIGH)
             {
@@ -472,6 +479,10 @@ public class Commands extends LinearOpMode
                     // Drive forward 3 inches to bump beacon, then back off
                     EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
                     EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                }
+                else
+                {
+                    Searching=false;
                 }
             }
             idle();
