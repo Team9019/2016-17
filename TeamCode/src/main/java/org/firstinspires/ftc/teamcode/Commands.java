@@ -421,24 +421,23 @@ public class Commands extends LinearOpMode
         runtime.reset();
 
         //temporary loop (15 seconds) to test beacon
-        while ( opMode.opModeIsActive() &&
-                runtime.seconds() < 15)
-        {
-            telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-            telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            telemetry.update();
+        //while ( opMode.opModeIsActive() &&
+        //        runtime.seconds() < 15)
+        //{
+        //    telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+        //    telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+        //    telemetry.update();
 
-            idle();
-        }
+        //    idle();
+        //}
 
         while ( opMode.opModeIsActive() &&
                 robot.sensorColor.alpha() < 20 &&
-                runtime.seconds() < 15)
+                runtime.seconds() < 15
+                )
         {
             telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
             telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            telemetry.addData("SenseBeacon", "> RED_COLOR_LOW: " + Configuration.RED_COLOR_LOW);
-            telemetry.addData("SenseBeacon", "> RED_COLOR_HIGH: " + Configuration.RED_COLOR_HIGH);
             telemetry.update();
 
             if (robot.sensorColor.red()>=Configuration.RED_COLOR_LOW && robot.sensorColor.red()<=Configuration.RED_COLOR_HIGH)
