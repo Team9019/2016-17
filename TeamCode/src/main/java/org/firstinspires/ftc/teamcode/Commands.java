@@ -437,6 +437,8 @@ public class Commands extends LinearOpMode
         {
             telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
             telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            telemetry.addData("SenseBeacon", "> RED_COLOR_LOW: " + Configuration.RED_COLOR_LOW);
+            telemetry.addData("SenseBeacon", "> RED_COLOR_HIGH: " + Configuration.RED_COLOR_HIGH);
             telemetry.update();
 
             if (robot.sensorColor.red()>=Configuration.RED_COLOR_LOW && robot.sensorColor.red()<=Configuration.RED_COLOR_HIGH)
