@@ -25,6 +25,7 @@ RED_COLOR_HIGH = 8
 BLUE_COLOR_LOW = 1
 BLUE_COLOR_HIGH = 2
 
+
 #ALLIANCE:              RED or BLUE
 #START_POSITION:        LONG or SHORT
 #AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
