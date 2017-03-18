@@ -102,8 +102,8 @@ public class Initialize extends LinearOpMode
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
-        robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
-        robot.servoTusk.setPosition(Configuration.CLOSED_TUSK_SERVO_POS);
+        robot.servoLift.setPosition(Configuration.POS_CLOSED_LIFT_SERVO);
+        robot.servoTusk.setPosition(Configuration.POS_CLOSED_TUSK_SERVO);
 
         //telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
 
