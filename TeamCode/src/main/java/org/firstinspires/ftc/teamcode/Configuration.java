@@ -27,43 +27,48 @@ public class Configuration
     //Phone configurable settings:
     //*****************************************
     //Motor Power
-        public static double DRIVE_POWER = 0.6;
-        public static double TURN_POWER = 0.5;
-        public static double LAUNCH_POWER = 0.55;
-        public static double APPROACH_SPEED = 0.25;
+        public static double POWER_DRIVE;
+        public static double POWER_TURN;
+        public static double POWER_LAUNCH;
+        public static double POWER_APPROACH;
 
     //Servo Positions
-        public static double CLOSED_LIFT_SERVO_POS = 0.0;
-        public static double OPEN_LIFT_SERVO_POS = 1.0;
+        public static double POS_CLOSED_LIFT_SERVO;
+        public static double POS_OPEN_LIFT_SERVO;
 
-        public static double CLOSED_TUSK_SERVO_POS = 1.0;
-        public static double OPEN_TUSK_SERVO_POS = 0.0;
+        public static double POS_CLOSED_TUSK_SERVO;
+        public static double POS_OPEN_TUSK_SERVO;
 
     //Time Settings
-        public static int AUTO_DELAY_TIME = 0;
-        public static int LAUNCH_TIME = 5000;
+        public static int TIME_AUTO_DELAY;
+        public static int TIME_LAUNCH;
 
     //Measurement Settings
-        public static double LONG_DIST_TO_SHOOT =10.0;          //Inches to drive from LONG start position before shooting ball
-        public static double SHORT_DIST_TO_SHOOT =0.0;          //Inches to drive from SHORT start position before shooting ball
-        public static double LONG_DIST_TO_PARK = 62.0;          //Inches to drive from after shooting when starting in LONG position
-        public static double SHORT_DIST_TO_PARK =43.0;          //Inches to drive from after shooting when starting in SHORT position
-        public static double LONG_FIRST_BEACON_AIM_DIST =66.0;  //Inches from LONG shooter position to beacon turn
-        public static double SHORT_FIRST_BEACON_AIM_DIST =60.0; //Inches from SHORT shooter position to beacon turn
-        public static double LONG_FIRST_BEACON_DIST = 50.0;      //Inches from LONG turn position to beacon
-        public static double SHORT_FIRST_BEACON_DIST =40.0;     //Inches from SHORT turn position to beacon
+        public static int DIST_LONG_TO_SHOOT;          //Inches to drive from LONG start position before shooting ball
+        public static int DIST_SHORT_TO_SHOOT;          //Inches to drive from SHORT start position before shooting ball
+        public static int DIST_LONG_TO_PARK;          //Inches to drive from after shooting when starting in LONG position
+        public static int DIST_SHORT_TO_PARK;          //Inches to drive from after shooting when starting in SHORT position
+        public static int DIST_LONG_FIRST_BEACON_AIM;  //Inches from LONG shooter position to beacon turn
+        public static int DIST_SHORT_FIRST_BEACON_AIM; //Inches from SHORT shooter position to beacon turn
+        public static int DIST_LONG_FIRST_BEACON;      //Inches from LONG turn position to beacon
+        public static int DIST_SHORT_FIRST_BEACON;     //Inches from SHORT turn position to beacon
 
-        public static double NINETY_DEGREE_TURN_INCHES = 20.0;
+        public static int W_DIST_SHORT_TO_WALL;
+        public static int W_DIST_SHORT_TO_BEACON_1;
+        public static int W_DIST_SHORT_TO_BEACON_2;
+        public static int W_DIST_SHORT_TO_CENTER;
 
-        public static int RED_COLOR_LOW = 3;
-        public static int RED_COLOR_HIGH = 8;
-        public static int BLUE_COLOR_LOW = 1;
-        public static int BLUE_COLOR_HIGH = 2;
+        public static int INCHES_NINETY_DEGREE_TURN;
+
+        public static int COLOR_RED_LOW = 3;
+        public static int COLOR_RED_HIGH = 8;
+        public static int COLOR_BLUE_LOW = 1;
+        public static int COLOR_BLUE_HIGH = 2;
 
     //*****************************************
     //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
     //*****************************************
-        public static double FORTYFIVE_DEGREE_TURN_INCHES = NINETY_DEGREE_TURN_INCHES / 2;
+        public static double INCHES_FORTYFIVE_DEGREE_TURN = INCHES_NINETY_DEGREE_TURN / 2;
 
         //COUNTS_PER_INCH is calculated here with a default, but is is being overridden by a phone setting.
         private static double COUNTS_PER_MOTOR_REV = 1120;
@@ -100,37 +105,42 @@ public class Configuration
             ALLIANCE = properties.getProperty("ALLIANCE");
             START_POSITION = properties.getProperty("START_POSITION");
 
-            DRIVE_POWER = Double.parseDouble(properties.getProperty("DRIVE_POWER"));
-            TURN_POWER = Double.parseDouble(properties.getProperty("TURN_POWER"));
-            LAUNCH_POWER = Double.parseDouble(properties.getProperty("LAUNCH_POWER"));
-            APPROACH_SPEED = Double.parseDouble(properties.getProperty("APPROACH_SPEED"));
+            POWER_DRIVE = Double.parseDouble(properties.getProperty("POWER_DRIVE"));
+            POWER_TURN = Double.parseDouble(properties.getProperty("POWER_TURN"));
+            POWER_LAUNCH = Double.parseDouble(properties.getProperty("POWER_LAUNCH"));
+            POWER_APPROACH = Double.parseDouble(properties.getProperty("POWER_APPROACH"));
 
-            CLOSED_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("CLOSED_LIFT_SERVO_POS"));
-            OPEN_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("OPEN_LIFT_SERVO_POS"));
+            POS_CLOSED_LIFT_SERVO = Double.parseDouble(properties.getProperty("POS_CLOSED_LIFT_SERVO"));
+            POS_OPEN_LIFT_SERVO = Double.parseDouble(properties.getProperty("POS_OPEN_LIFT_SERVO"));
 
-            CLOSED_TUSK_SERVO_POS = Double.parseDouble(properties.getProperty("CLOSED_TUSK_SERVO_POS"));
-            OPEN_TUSK_SERVO_POS = Double.parseDouble(properties.getProperty("OPEN_TUSK_SERVO_POS"));
+            POS_CLOSED_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_CLOSED_TUSK_SERVO"));
+            POS_OPEN_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_OPEN_TUSK_SERVO"));
 
-            AUTO_DELAY_TIME = Integer.parseInt(properties.getProperty("AUTO_DELAY_TIME"));
-            LAUNCH_TIME = Integer.parseInt(properties.getProperty("LAUNCH_TIME"));
+            TIME_AUTO_DELAY = Integer.parseInt(properties.getProperty("TIME_AUTO_DELAY"));
+            TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH"));
 
-            LONG_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("LONG_DIST_TO_SHOOT"));
-            SHORT_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_SHOOT"));
-            LONG_DIST_TO_PARK = Double.parseDouble(properties.getProperty("LONG_DIST_TO_PARK"));
-            SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
+            DIST_LONG_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_LONG_TO_SHOOT"));
+            DIST_SHORT_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_SHORT_TO_SHOOT"));
+            DIST_LONG_TO_PARK = Integer.parseInt(properties.getProperty("DIST_LONG_TO_PARK"));
+            DIST_SHORT_TO_PARK = Integer.parseInt(properties.getProperty("DIST_SHORT_TO_PARK"));
 
-            LONG_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_AIM_DIST"));
-            SHORT_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_AIM_DIST"));
-            LONG_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_DIST"));
-            SHORT_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_DIST"));
+            DIST_LONG_FIRST_BEACON_AIM = Integer.parseInt(properties.getProperty("DIST_LONG_FIRST_BEACON_AIM"));
+            DIST_SHORT_FIRST_BEACON_AIM = Integer.parseInt(properties.getProperty("DIST_SHORT_FIRST_BEACON_AIM"));
+            DIST_LONG_FIRST_BEACON = Integer.parseInt(properties.getProperty("DIST_LONG_FIRST_BEACON"));
+            DIST_SHORT_FIRST_BEACON = Integer.parseInt(properties.getProperty("DIST_SHORT_FIRST_BEACON"));
+
+            W_DIST_SHORT_TO_WALL = Integer.parseInt(properties.getProperty("W_DIST_SHORT_TO_WALL"));
+            W_DIST_SHORT_TO_BEACON_1 = Integer.parseInt(properties.getProperty("W_DIST_SHORT_TO_BEACON_1"));
+            W_DIST_SHORT_TO_BEACON_2 = Integer.parseInt(properties.getProperty("W_DIST_SHORT_TO_BEACON_2"));
+            W_DIST_SHORT_TO_CENTER = Integer.parseInt(properties.getProperty("W_DIST_SHORT_TO_CENTER"));
 
             COUNTS_PER_INCH = Double.parseDouble(properties.getProperty("COUNTS_PER_INCH"));
-            NINETY_DEGREE_TURN_INCHES = Double.parseDouble(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
+            INCHES_NINETY_DEGREE_TURN = Integer.parseInt(properties.getProperty("INCHES_NINETY_DEGREE_TURN"));
 
-            RED_COLOR_LOW = Integer.parseInt(properties.getProperty("RED_COLOR_LOW"));
-            RED_COLOR_HIGH = Integer.parseInt(properties.getProperty("RED_COLOR_HIGH"));
-            BLUE_COLOR_LOW = Integer.parseInt(properties.getProperty("BLUE_COLOR_LOW"));
-            BLUE_COLOR_HIGH = Integer.parseInt(properties.getProperty("BLUE_COLOR_HIGH"));
+            COLOR_RED_LOW = Integer.parseInt(properties.getProperty("COLOR_RED_LOW"));
+            COLOR_RED_HIGH = Integer.parseInt(properties.getProperty("COLOR_RED_HIGH"));
+            COLOR_BLUE_LOW = Integer.parseInt(properties.getProperty("COLOR_BLUE_LOW"));
+            COLOR_BLUE_HIGH = Integer.parseInt(properties.getProperty("COLOR_BLUE_HIGH"));
 
             in.close();
         }
