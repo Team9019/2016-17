@@ -156,11 +156,11 @@ public class Commands extends LinearOpMode
         if (opMode.opModeIsActive())
         {
             runtime.reset();
-            robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+            robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
 
             runtime.reset();
             while (opMode.opModeIsActive() &&
-                    runtime.milliseconds() < Configuration.LAUNCH_TIME) {
+                    runtime.milliseconds() < Configuration.POWER_LAUNCH) {
                 telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
                 telemetry.update();
 
@@ -443,7 +443,7 @@ public class Commands extends LinearOpMode
             telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
             telemetry.update();
 
-            if (robot.sensorColor.red()>=Configuration.RED_COLOR_LOW && robot.sensorColor.red()<=Configuration.RED_COLOR_HIGH)
+            if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
             {
                 telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
                 telemetry.update();
@@ -455,16 +455,17 @@ public class Commands extends LinearOpMode
                     //wait 6 seconds before determining whether to drive forward again (wrong color)
                     sleep(6000);
 
+                    //Replace with extender
                     // Drive forward 3 inches to bump beacon, then back off
-                    EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-                    EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                    //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
+                    //EncoderDrive(robot, Configuration.POWER_APPROACH,-3,-3, 3.0);
                 }
                 else
                 {
                     Searching= false;
                 }
             }
-            else if (robot.sensorColor.blue()>=Configuration.BLUE_COLOR_LOW && robot.sensorColor.blue()<=Configuration.BLUE_COLOR_HIGH)
+            else if (robot.sensorColor.blue()>=Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue()<=Configuration.COLOR_BLUE_HIGH)
             {
                 telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
                 telemetry.update();
@@ -476,9 +477,10 @@ public class Commands extends LinearOpMode
                     //wait 6 seconds before determining whether to drive forward again (wrong color)
                     sleep(6000);
 
+                    //Replace with extender
                     // Drive forward 3 inches to bump beacon, then back off
-                    EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-                    EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                    //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
+                    //EncoderDrive(robot, Configuration.POWER_APPROACH,-3,-3, 3.0);
                 }
                 else
                 {
