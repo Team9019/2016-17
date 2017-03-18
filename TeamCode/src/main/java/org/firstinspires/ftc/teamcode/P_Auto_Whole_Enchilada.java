@@ -22,7 +22,7 @@ FUNCTION:
 
 @Autonomous(name="5 All Gyro", group="Autonomous")
 @Disabled
-public class SR_Auto_Whole_Enchilada extends LinearOpMode
+public class P_Auto_Whole_Enchilada extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);

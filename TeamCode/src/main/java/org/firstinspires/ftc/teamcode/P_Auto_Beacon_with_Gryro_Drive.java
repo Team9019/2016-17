@@ -22,7 +22,7 @@ FUNCTION:
 
 @Autonomous(name="4 Beacon (Gyro)", group="Autonomous")
 @Disabled
-class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
+class P_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
