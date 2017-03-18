@@ -2,24 +2,25 @@ ALLIANCE = RED
 START_POSITION = LONG
 
 TIME_AUTO_DELAY = 0
+TIME_LAUNCH = 5000
+
 POWER_DRIVE = 0.6
 POWER_TURN = 0.8
 POWER_LAUNCH = 0.45
 POWER_APPROACH = 0.25
-TIME_LAUNCH = 5000
 
-DIST_LONG_TO_SHOOT = 18
-DIST_LONG_TO_PARK = 54
-DIST_LONG_FIRST_BEACON_AIM = 66
+DIST_SHORT_TO_WALL = 28
+DIST_RAMP_TO_BEACON_1 = 6
+DIST_BEACON1_TO_BEACON_2 = 48
+DIST_BEACON2_TO_CORNER = 12
+DIST_CORNER_TO_SHOOT = 18
+DIST_CORNER_TO_PARK = 54
+
+DIST_SIDE_TO_SHOOT = 8
+DIST_SIDE_TO_PARK = 43
+DIST_LONG_BEACON1_AIM = 66
 DIST_LONG_FIRST_BEACON = 47
-
-W_DIST_SHORT_TO_WALL = 28
-W_DIST_SHORT_TO_BEACON_1 = 6
-W_DIST_SHORT_TO_BEACON_2 = 48
-W_DIST_SHORT_TO_CENTER = 72
-DIST_SHORT_TO_SHOOT = 8
-DIST_SHORT_TO_PARK = 43
-DIST_SHORT_FIRST_BEACON_AIM = 33
+DIST_SHORT_BEACON1_AIM = 33
 DIST_SHORT_FIRST_BEACON = 25
 
 COUNTS_PER_INCH = 39
@@ -35,29 +36,3 @@ POS_CLOSED_LIFT_SERVO = .25
 POS_OPEN_LIFT_SERVO = 1.0
 POS_CLOSED_TUSK_SERVO = .8
 POS_OPEN_TUSK_SERVO = 0.0
-
-#ALLIANCE:              RED or BLUE
-#START_POSITION:        LONG or SHORT
-#AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
-#DRIVE_POWER:           Motor-power:  Drive speed
-#TURN_POWER:            Motor-power:  Turn power
-#LAUNCH_POWER:          Motor-power:  Ball launch power
-#APPROACH_SPEED:        Motor-power:  Tank power to approach beacon
-#CLOSED_LIFT_SERVO_POS  Servo: Closed position
-#OPEN_LIFT_SERVO_POS    Servo:  Open (drop) position
-#CLOSED_TUSK_SERVO_POS  Servo:  Closed position
-#OPEN_TUSK_SERVO_POS    Servo:  Open (drop)position
-#LAUNCH_TIME            Motor-time:  Time to power motor to launch ball
-#LONG_DIST_TO_SHOOT     Distance:   Inches to drive from LONG start position before shooting ball
-#LONG_DIST_TO_PARK      Distance:   Inches to drive from after shooting when starting in LONG position
-#SHORT_DIST_TO_SHOOT    Distance:   Inches to drive from SHORT start position before shooting ball
-#SHORT_DIST_TO_PARK     Distance:   Inches to drive from after shooting when starting in SHORT position
-#LONG_FIRST_BEACON_AIM_DIST Distance:   Inches from LONG shooter position to beacon turn
-#LONG_FIRST_BEACON_DIST     Distance:   Inches from LONG turn position to beacon
-#SHORT FIRST_BEACON_AIM_DIST Distance:   Inches from SHORT shooter position to beacon turn
-#SHORT_FIRST_BEACON_DIST    Distance:   Inches from SHORT turn position to beacon
-#COUNTS_PER_INCH        Measure:  Counts per inch
-#RED_COLOR_LOW          Color:  Red range low
-#RED_COLOR_HIGH         Color:  Red range high
-#BLUE_COLOR_LOW         Color:  Blue range low
-#BLUE_COLOR_HIGH        Color:  Blue range high
