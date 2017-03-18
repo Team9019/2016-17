@@ -17,7 +17,7 @@ FUNCTION:
 
 @Autonomous(name="2 Center Park (Req. SHORT/LONG/DELAY)", group="Autonomous")
 //@Disabled
-public class SR_Auto_Center_Park extends LinearOpMode
+public class W_Auto_Center_Park extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -54,11 +54,11 @@ public class SR_Auto_Center_Park extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, Configuration.DIST_LONG_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, Configuration.DIST_CORNER_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_SHOOT, Configuration.DIST_SHORT_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, Configuration.DIST_SIDE_TO_SHOOT, 5.0);
         }
 
         robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
@@ -75,11 +75,11 @@ public class SR_Auto_Center_Park extends LinearOpMode
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_PARK, Configuration.DIST_LONG_TO_PARK, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_PARK, Configuration.DIST_CORNER_TO_PARK, 5.0);
         }
         else
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_PARK, Configuration.DIST_SHORT_TO_PARK, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_PARK, Configuration.DIST_SIDE_TO_PARK, 5.0);
             //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
         }
 

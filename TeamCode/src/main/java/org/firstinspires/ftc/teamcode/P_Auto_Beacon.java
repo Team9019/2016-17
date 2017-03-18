@@ -22,7 +22,7 @@ FUNCTION:
 
 @Autonomous(name="3 Beacon (Encoders)", group="Autonomous")
 @Disabled
-public class SR_Auto_Beacon extends LinearOpMode {
+public class P_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry, this);
@@ -59,11 +59,11 @@ public class SR_Auto_Beacon extends LinearOpMode {
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, Configuration.DIST_LONG_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, Configuration.DIST_CORNER_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_SHOOT, Configuration.DIST_SHORT_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, Configuration.DIST_SIDE_TO_SHOOT, 5.0);
         }
 
         robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
@@ -81,11 +81,11 @@ public class SR_Auto_Beacon extends LinearOpMode {
         //Drive to line up with closest beacon
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_FIRST_BEACON_AIM, Configuration.DIST_LONG_FIRST_BEACON_AIM, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_BEACON1_AIM, Configuration.DIST_LONG_BEACON1_AIM, 5.0);
         }
         else
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON_AIM, Configuration.DIST_SHORT_FIRST_BEACON_AIM, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_BEACON1_AIM, Configuration.DIST_SHORT_BEACON1_AIM, 5.0);
         }
 
         //Turn to face beacon

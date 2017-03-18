@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /*
@@ -20,7 +21,7 @@ FUNCTION:
  */
 
 @Autonomous(name="4 Beacon SHORT TWO (Req. RED/BLUE/DELAY)", group="Autonomous")
-//@Disabled
+@Disabled
 public class SR_Auto_Beacon_SHORT_TWO extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -49,7 +50,7 @@ public class SR_Auto_Beacon_SHORT_TWO extends LinearOpMode {
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.AUTO_DELAY_TIME);
+        sleep(Configuration.TIME_AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -71,46 +72,46 @@ public class SR_Auto_Beacon_SHORT_TWO extends LinearOpMode {
 
         //Due to the position of the beacon pusher, the RED field requires a different drive distance
         if(Configuration.ALLIANCE.equals("RED")) {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER,
-                    Configuration.SHORT_DIST_TO_SHOOT + Configuration.SHORT_FIRST_BEACON_AIM_DIST + 2,
-                    Configuration.SHORT_DIST_TO_SHOOT + Configuration.SHORT_FIRST_BEACON_AIM_DIST + 2,
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE,
+                    Configuration.DIST_SIDE_TO_SHOOT + Configuration.DIST_SHORT_BEACON1_AIM + 2,
+                    Configuration.DIST_SIDE_TO_SHOOT + Configuration.DIST_SHORT_BEACON1_AIM + 2,
                     5.0);
         }
         else
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER,
-                    Configuration.SHORT_DIST_TO_SHOOT + Configuration.SHORT_FIRST_BEACON_AIM_DIST ,
-                    Configuration.SHORT_DIST_TO_SHOOT + Configuration.SHORT_FIRST_BEACON_AIM_DIST ,
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE,
+                    Configuration.DIST_SIDE_TO_SHOOT + Configuration.DIST_SHORT_BEACON1_AIM ,
+                    Configuration.DIST_SIDE_TO_SHOOT + Configuration.DIST_SHORT_BEACON1_AIM ,
                     5.0);
         }
         //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_TURN, -Configuration.INCHES_NINETY_DEGREE_TURN, Configuration.INCHES_NINETY_DEGREE_TURN, 5.0);
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_TURN, Configuration.INCHES_NINETY_DEGREE_TURN, -Configuration.INCHES_NINETY_DEGREE_TURN, 5.0);
         }
 
         //Due to the position of the beacon pusher, the RED field requires a different drive distance
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST -1, Configuration.SHORT_FIRST_BEACON_DIST -1, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON -1, Configuration.DIST_SHORT_FIRST_BEACON -1, 5.0);
         }
         else
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, Configuration.SHORT_FIRST_BEACON_DIST, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON, Configuration.DIST_SHORT_FIRST_BEACON, 5.0);
         }
 
         //Backup 3 inches to assess color
-        cmds.EncoderDrive(robot,Configuration.APPROACH_SPEED, -3, -3, 5.0);
+        cmds.EncoderDrive(robot,Configuration.POWER_APPROACH, -3, -3, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
         cmds.SenseBeacon(robot);
 
         //Backup to center
-        cmds.EncoderDrive(robot,Configuration.DRIVE_POWER, -48, -48, 5.0);
+        cmds.EncoderDrive(robot,Configuration.POWER_DRIVE, -48, -48, 5.0);
 
         cmds.StopDriving(robot);
 
