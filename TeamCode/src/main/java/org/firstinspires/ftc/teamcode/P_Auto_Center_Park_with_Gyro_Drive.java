@@ -1,11 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /*
 FUNCTION:
-    Autonomous: Uses encoders only
+    Autonomous: Uses gyro only
 
     Steps:
         <optional delay>
@@ -15,9 +16,9 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="1 Shoot Only (Req. SHORT/LONG/DELAY)", group="Autonomous")
-//@Disabled
-public class SR_Auto_Shoot_Only extends LinearOpMode
+@Autonomous(name="2 Center Park (Gyro)", group="Autonomous")
+@Disabled
+public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -34,6 +35,7 @@ public class SR_Auto_Shoot_Only extends LinearOpMode
 
         configs.loadParameters();
 
+        //cmds.InitializeHW(robot);
         init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
@@ -46,7 +48,7 @@ public class SR_Auto_Shoot_Only extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.AUTO_DELAY_TIME);
+        sleep(Configuration.TIME_AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -54,14 +56,14 @@ public class SR_Auto_Shoot_Only extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, Configuration.LONG_DIST_TO_SHOOT, 5.0);
+            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, 0, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, Configuration.SHORT_DIST_TO_SHOOT, 5.0);
+            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_SHOOT, 0, 5.0);
         }
 
-        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+        robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
 
         //Use delay until ball launch is ready for use
         sleep(2000);
@@ -71,6 +73,19 @@ public class SR_Auto_Shoot_Only extends LinearOpMode
         cmds.Shoot(robot);
 
         robot.motorCollect.setPower(0);
+
+        //Drive to center
+        if (Configuration.START_POSITION.equals("LONG"))
+        {
+            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_PARK, 0, 5.0);
+        }
+        else //SHORT
+        {
+            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_PARK, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, 6, 0, 5.0);
+        }
+
+        cmds.StopDriving(robot);
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();
