@@ -25,9 +25,9 @@ FUNCTION:
         Stop
  */
 
-@Autonomous(name="4 Beacon SHORT *NEW*(Req. RED/BLUE/DELAY)", group="Autonomous")
+@Autonomous(name="3 Beacon SHORT *NEW* (Req. RED/BLUE/DELAY)", group="Autonomous")
 //@Disabled
-public class World_Auto_Beacon_SHORT extends LinearOpMode {
+public class W_Auto_Beacon_SHORT extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry, this);
@@ -72,35 +72,54 @@ public class World_Auto_Beacon_SHORT extends LinearOpMode {
             Sign = -1;
         }
 
-        //Drive to the wall
-        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.W_DIST_SHORT_TO_WALL*Sign - (6*Sign), Configuration.W_DIST_SHORT_TO_WALL*Sign - (6*Sign), 5.0);
+        //Drive to the wall, slowing for the last 6 inches
+        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_WALL*Sign - (6*Sign), Configuration.DIST_SHORT_TO_WALL*Sign - (6*Sign), 5.0);
         cmds.EncoderDrive(robot, Configuration.POWER_APPROACH, 6*Sign, 6*Sign, 5.0);
 
         //Turn to face beacon
-        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, 5.0);
-
-        //Drive to first beacon
-        cmds.EncoderDrive(robot, Configuration.POWER_APPROACH, Configuration.W_DIST_SHORT_TO_BEACON_1*Sign, Configuration.W_DIST_SHORT_TO_BEACON_1*Sign, 5.0);
-
-        cmds.SenseBeacon(robot);
-
-        //Drive to second beacon
-        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.W_DIST_SHORT_TO_BEACON_2*Sign, Configuration.W_DIST_SHORT_TO_BEACON_2*Sign, 5.0);
-
-        cmds.SenseBeacon(robot);
-
-        //Turn to face center with rear
-        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.INCHES_FORTYFIVE_DEGREE_TURN*(-Sign), Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, 5.0);
-
-        //reverse  to park on center
+        //cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, 5.0);
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.W_DIST_SHORT_TO_CENTER*(-Sign), Configuration.W_DIST_SHORT_TO_CENTER*(-Sign), 5.0);
+            cmds.EncoderTurn(robot,"R",Configuration.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
-        else    //BLUE
+        else //BLUE
         {
+            cmds.EncoderTurn(robot,"L",Configuration.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
+        }
+
+        //Drive to first beacon
+        cmds.EncoderDrive(robot, Configuration.POWER_APPROACH, Configuration.DIST_RAMP_TO_BEACON_1*Sign, Configuration.DIST_RAMP_TO_BEACON_1*Sign, 5.0);
+
+        cmds.SenseBeacon(robot);
+
+        //Drive to second beacon, slowing for the last 6 inches
+        cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_BEACON1_TO_BEACON_2*Sign - (6*Sign), Configuration.DIST_BEACON1_TO_BEACON_2*Sign - (6*Sign), 5.0);
+        cmds.EncoderDrive(robot, Configuration.POWER_APPROACH, 6*Sign, 6*Sign, 5.0);
+
+        cmds.SenseBeacon(robot);
+
+        //Drive to corner position
+        cmds.EncoderDrive(robot, Configuration.POWER_APPROACH, Configuration.DIST_BEACON2_TO_CORNER*Sign, Configuration.DIST_BEACON2_TO_CORNER*Sign, 5.0);
+
+        //Turn to face center
+        //cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.INCHES_FORTYFIVE_DEGREE_TURN*(-Sign), Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, 5.0);
+        cmds.EncoderTurn(robot,"R",Configuration.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
+
+        //For RED, turn another 90 degrees
+        if(Configuration.ALLIANCE.equals("RED"))
+        {
+            cmds.EncoderTurn(robot,"R",Configuration.INCHES_NINETY_DEGREE_TURN,5.0);
+        }
+
+        //reverse  to park on center
+        //if(Configuration.ALLIANCE.equals("RED"))
+        //{
+        //    cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.W_DIST_SHORT_TO_CENTER*(-Sign), Configuration.W_DIST_SHORT_TO_CENTER*(-Sign), 5.0);
+        //}
+        //else    //BLUE
+        //{
             //Move close enough to shoot balls
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, Configuration.DIST_LONG_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, Configuration.DIST_CORNER_TO_SHOOT, 5.0);
 
             robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
 
@@ -114,8 +133,8 @@ public class World_Auto_Beacon_SHORT extends LinearOpMode {
             robot.motorCollect.setPower(0);
 
             //Drive to center
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.W_DIST_SHORT_TO_CENTER, Configuration.W_DIST_SHORT_TO_CENTER, 5.0);
-        }
+            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_PARK, Configuration.DIST_CORNER_TO_PARK, 5.0);
+        //}
 
         cmds.StopDriving(robot);
 
