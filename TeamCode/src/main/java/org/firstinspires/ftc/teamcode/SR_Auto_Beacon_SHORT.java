@@ -50,7 +50,7 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.TIME_AUTO_DELAY);
+        sleep(Configuration.AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
