@@ -5,8 +5,6 @@ import android.graphics.Color;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /*
@@ -41,12 +39,10 @@ public class Commands extends LinearOpMode
         int newLeftBackTarget;
         int newRightBackTarget;
 
-        telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
+        telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Starting...");
         telemetry.update();
 
         //System.out.println(Configuration.COUNTS_PER_INCH);
-        //System.out.println(opModeIsActive());
-        //System.out.println(opMode.opModeIsActive());
 
         //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -145,12 +141,15 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //idle();   // optional pause after each move
         }
-        telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
+        telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Complete!");
         telemetry.update();
     }
 
     public void EncoderTurn (Hardware robot, String LR, double Inches, double timeoutS)
     {
+        telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Starting...");
+        telemetry.update();
+
         if (LR.equals("L"))
         {
             EncoderDrive(robot, Configuration.POWER_TURN, -Inches, Inches, timeoutS);
@@ -159,6 +158,8 @@ public class Commands extends LinearOpMode
         {
             EncoderDrive(robot, Configuration.POWER_TURN, Inches, -Inches, timeoutS);
         }
+        telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Complete!");
+        telemetry.update();
     }
 
     public void Shoot(Hardware robot) //throws InterruptedException
@@ -173,7 +174,8 @@ public class Commands extends LinearOpMode
 
             runtime.reset();
             while (opMode.opModeIsActive() &&
-                    runtime.milliseconds() < Configuration.POWER_LAUNCH) {
+                    runtime.milliseconds() < Configuration.TIME_LAUNCH)
+            {
                 telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
                 telemetry.update();
 
@@ -244,7 +246,7 @@ public class Commands extends LinearOpMode
                 robot.devIM.setLED(0, true);    //Blue
             }
 
-            //If beacon is the wrong color wait then pushthe button.
+            //If beacon is the wrong color wait then push the button.
             //If beacon is the correct color, turn off searching to allow moving on
             if (    (   (RedFound) && (Configuration.ALLIANCE.equals("BLUE"))) |
                     (   (BlueFound) && (Configuration.ALLIANCE.equals("RED")))
