@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * Created by Aimee on 3/2/2017.
  */
 
-@Autonomous(name="1 TEST", group="Test")
+@Autonomous(name="TEST - Function", group="Test")
 //@Disabled
 public class TEST_Distance extends LinearOpMode
 {
@@ -15,6 +15,8 @@ public class TEST_Distance extends LinearOpMode
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry, this);
     private Initialize init = new Initialize(telemetry);
+
+    private int TimeDebugSleep = 1500;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -26,11 +28,12 @@ public class TEST_Distance extends LinearOpMode
 
         configs.loadParameters();
 
-        //cmds.InitializeHW(robot);
         init.InitializeHW(robot);
 
-        telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
-        telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");
+        telemetry.addData("Config", Configuration.ALLIANCE + " Alliance");
+        telemetry.addData("Config", Configuration.START_POSITION + " Starting Position");
+        telemetry.addData("Config", Configuration.AUTO_DELAY /1000 + " Sec. Delay");
+        telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
         waitForStart();
@@ -42,6 +45,7 @@ public class TEST_Distance extends LinearOpMode
             //cmds.SenseBeacon(robot);
 
         //***********************************
+        sleep(TimeDebugSleep);
 
         cmds.StopDriving(robot);
 

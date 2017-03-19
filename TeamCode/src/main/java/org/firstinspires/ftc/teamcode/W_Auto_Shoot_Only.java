@@ -15,7 +15,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="1 Shoot Only (Req. SHORT/LONG/DELAY)", group="Autonomous")
+@Autonomous(name="1 Shoot Only (Req. POS/DELAY)", group="Autonomous")
 //@Disabled
 public class W_Auto_Shoot_Only extends LinearOpMode
 {
@@ -23,6 +23,8 @@ public class W_Auto_Shoot_Only extends LinearOpMode
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry,this);
     private Initialize init = new Initialize(telemetry);
+
+    private int TimeDebugSleep = 0;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -36,8 +38,9 @@ public class W_Auto_Shoot_Only extends LinearOpMode
 
         init.InitializeHW(robot);
 
-        telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
-        telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");
+        telemetry.addData("Config", Configuration.START_POSITION + " Starting Position");
+        telemetry.addData("Config", Configuration.AUTO_DELAY /1000 + " Sec. Delay");
+        telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
         waitForStart();
@@ -46,10 +49,11 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.TIME_AUTO_DELAY);
+        sleep(Configuration.AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
+        sleep(TimeDebugSleep);
 
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
@@ -60,6 +64,7 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         {
             cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, Configuration.DIST_SIDE_TO_SHOOT, 5.0);
         }
+        sleep(TimeDebugSleep);
 
         robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
 
@@ -71,6 +76,7 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         cmds.Shoot(robot);
 
         robot.motorCollect.setPower(0);
+        sleep(TimeDebugSleep);
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();
