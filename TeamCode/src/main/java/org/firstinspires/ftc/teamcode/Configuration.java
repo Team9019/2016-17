@@ -47,8 +47,9 @@ public class Configuration
     //Defaults are being set within the configuration to ensure that if the configs fail to load,
     //settings will still take place.  The configproperties.txt will override these defaults.
 
-    public static String ALLIANCE = "RED";
-    public static String START_POSITION = "SHORT";
+    public static String ALLIANCE;
+    public static String START_POSITION;
+    public static int AUTO_DELAY;
 
     //*****************************************
     //Phone configurable settings:
@@ -66,7 +67,6 @@ public class Configuration
         public static double POS_OPEN_TUSK_SERVO;
 
     //Time Settings
-        public static int TIME_AUTO_DELAY;
         public static int TIME_LAUNCH;
 
     //Measurement Settings
@@ -85,7 +85,7 @@ public class Configuration
         public static int DIST_BEACON2_TO_CORNER;
         //public static int W_DIST_SHORT_TO_CENTER;
 
-        public static int INCHES_NINETY_DEGREE_TURN;
+        public static double INCHES_NINETY_DEGREE_TURN;
 
         public static int COLOR_RED_LOW = 3;
         public static int COLOR_RED_HIGH = 8;
@@ -95,17 +95,17 @@ public class Configuration
     //*****************************************
     //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
     //*****************************************
-        public static double INCHES_FORTYFIVE_DEGREE_TURN = INCHES_NINETY_DEGREE_TURN / 2;
+        public static double INCHES_FORTYFIVE_DEGREE_TURN;
 
         //COUNTS_PER_INCH is calculated here with a default, but is is being overridden by a phone setting.
-        private static double COUNTS_PER_MOTOR_REV = 1120;
-        private static double DRIVE_GEAR_REDUCTION = 0.39;
-        private static double WHEEL_DIAMETER_INCHES = 4.0;
-        public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
+        //private static double COUNTS_PER_MOTOR_REV = 1120;
+        //private static double DRIVE_GEAR_REDUCTION = 0.39;
+        //private static double WHEEL_DIAMETER_INCHES = 4.0;
+        public static double COUNTS_PER_INCH;   // = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
 
-        public static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
-        public static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
-        public static final double     P_DRIVE_COEFF           = 0.15;    // Larger is more responsive, but also less stable
+        //public static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
+        //public static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
+        //public static final double     P_DRIVE_COEFF           = 0.15;    // Larger is more responsive, but also less stable
 
     /* Constructor */
     public Configuration(Telemetry telemetry)
@@ -131,6 +131,7 @@ public class Configuration
 
             ALLIANCE = properties.getProperty("ALLIANCE");
             START_POSITION = properties.getProperty("START_POSITION");
+            AUTO_DELAY = Integer.parseInt(properties.getProperty("AUTO_DELAY")) * 1000 ;
 
             POWER_DRIVE = Double.parseDouble(properties.getProperty("POWER_DRIVE"));
             POWER_TURN = Double.parseDouble(properties.getProperty("POWER_TURN"));
@@ -142,8 +143,7 @@ public class Configuration
             POS_CLOSED_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_CLOSED_TUSK_SERVO"));
             POS_OPEN_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_OPEN_TUSK_SERVO"));
 
-            TIME_AUTO_DELAY = Integer.parseInt(properties.getProperty("TIME_AUTO_DELAY"));
-            TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH"));
+            TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH")) * 1000;
 
             DIST_CORNER_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_CORNER_TO_SHOOT"));
             DIST_SIDE_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_SIDE_TO_SHOOT"));
@@ -162,7 +162,8 @@ public class Configuration
             //W_DIST_SHORT_TO_CENTER = Integer.parseInt(properties.getProperty("W_DIST_SHORT_TO_CENTER"));
 
             COUNTS_PER_INCH = Double.parseDouble(properties.getProperty("COUNTS_PER_INCH"));
-            INCHES_NINETY_DEGREE_TURN = Integer.parseInt(properties.getProperty("INCHES_NINETY_DEGREE_TURN"));
+            INCHES_NINETY_DEGREE_TURN = Double.parseDouble(properties.getProperty("INCHES_NINETY_DEGREE_TURN"));
+            INCHES_FORTYFIVE_DEGREE_TURN = INCHES_NINETY_DEGREE_TURN / 2;
 
             COLOR_RED_LOW = Integer.parseInt(properties.getProperty("COLOR_RED_LOW"));
             COLOR_RED_HIGH = Integer.parseInt(properties.getProperty("COLOR_RED_HIGH"));
