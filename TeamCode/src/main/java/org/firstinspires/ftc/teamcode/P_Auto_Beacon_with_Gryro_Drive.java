@@ -51,11 +51,11 @@ class P_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, 0, 5.0);
         }
         else //SHORT
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_SHOOT, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, 0, 5.0);
         }
 
         robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
@@ -72,11 +72,11 @@ class P_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
         //Drive to line up with closest beacon
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_FIRST_BEACON_AIM, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_BEACON1_AIM, 0, 5.0);
         }
         else
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON_AIM, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_BEACON1_AIM, 0, 5.0);
         }
 
         //Turn to face beacon
@@ -92,11 +92,11 @@ class P_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
         //Drive into beacon, pressing button
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_FIRST_BEACON, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_FIRST_BEACON, 0, 5.0);
         }
         else
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_FIRST_BEACON, 0, 5.0);
         }
 
         //Backup 3 inches to assess color

@@ -48,7 +48,7 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.TIME_AUTO_DELAY);
+        sleep(Configuration.AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -56,11 +56,11 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_SHOOT, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, 0, 5.0);
         }
         else //SHORT
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_SHOOT, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, 0, 5.0);
         }
 
         robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
@@ -77,12 +77,12 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_LONG_TO_PARK, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_PARK, 0, 5.0);
         }
         else //SHORT
         {
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SHORT_TO_PARK, 0, 5.0);
-            cmds.GyroDrive(robot, Configuration.POWER_DRIVE, 6, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_PARK, 0, 5.0);
+            //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, 6, 0, 5.0);
         }
 
         cmds.StopDriving(robot);

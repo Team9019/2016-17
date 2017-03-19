@@ -51,7 +51,7 @@ public class P_Auto_Beacon extends LinearOpMode {
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.TIME_AUTO_DELAY);
+        sleep(Configuration.AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -91,11 +91,11 @@ public class P_Auto_Beacon extends LinearOpMode {
         //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_TURN, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN, Configuration.INCHES_FORTYFIVE_DEGREE_TURN +1.5 , 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_TURN, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN, Configuration.INCHES_FORTYFIVE_DEGREE_TURN , 5.0);
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_TURN, Configuration.INCHES_FORTYFIVE_DEGREE_TURN +1.5, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
+            cmds.EncoderDrive(robot, Configuration.POWER_TURN, Configuration.INCHES_FORTYFIVE_DEGREE_TURN, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
         }
 
         //Drive into beacon, pressing button
