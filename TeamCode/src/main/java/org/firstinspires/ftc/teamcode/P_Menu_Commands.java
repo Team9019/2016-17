@@ -3,10 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import android.content.Context;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.Properties;
+import java.io.File;
 
 public class P_Menu_Commands
 {
@@ -60,14 +64,17 @@ public class P_Menu_Commands
     boolean back1, a1, b2, y1, start1;
     boolean lastBack1, lastA1, lastB2, lastY1, lastStart1;
 
-    private String configFileName="FtcRobotConfig.txt";
+    private Properties properties = new Properties();
+    private String configFileName="/storage/emulated/0/FIRST/configpropertiesmenu.txt";
 
     public P_Menu_Commands()
     {
         param = new Param();
     }
 
-    public void init(Context context, OpMode opMode) {
+    //Read in configpropertiesmenu file
+    public void init(Context context, OpMode opMode)
+    {
         // setup initial configuration parameters here
         gamepad1IsOK=false;
         gamepad2IsOK=false;
@@ -76,38 +83,36 @@ public class P_Menu_Commands
         // read configuration data from file
         try
         {
-            InputStream inputStream = context.openFileInput(configFileName);
+            FileInputStream in = new FileInputStream(configFileName);
+            properties.load(in);
 
-            if ( inputStream != null ) {
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
-
-                String colorAllianceTypeString = bufferedReader.readLine();
+            if ( in != null )
+            {
                 for (AllianceList a : AllianceList.values())
                 {
-                    if (a.name().equals(colorAllianceTypeString))
+                    if (a.name().equals(properties.getProperty("ALLIANCE")))
                     {
                         param.colorAlliance = a;
                     }
                 }
 
-                String autonTypeString = bufferedReader.readLine();
                 for (AutonType a : AutonType.values())
                 {
-                    if (a.name().equals(autonTypeString))
+                    if (a.name().equals(properties.getProperty("START_POSITION")))
                     {
                         param.autonType = a;
                     }
                 }
 
-                param.delayInSec = Integer.valueOf(bufferedReader.readLine());
+                param.delayInSec = Integer.parseInt(properties.getProperty("AUTO_DELAY")) * 1000 ;
 
-                inputStream.close();
+                in.close();
             }
         }
         catch (Exception e)
         {
             opMode.telemetry.addData("Exception", "Error reading config file: " + e.toString());
+            opMode.telemetry.update();
 
             // can't read from file, so initialize to reasonable values
             //***************************************
@@ -187,6 +192,7 @@ public class P_Menu_Commands
                 param.colorAlliance = param.colorAlliance.prev();
             }
         }
+        //param.colorAlliance = param.colorAlliance.BLUE;
 
         currConfigStepCheck = ConfigStep.AUTON_TYPE;
         // message to driver about state of this config parameter
@@ -228,21 +234,35 @@ public class P_Menu_Commands
 
         currConfigStepCheck = ConfigStep.READY;
         // message to driver about state of this config parameter
-        if (configStepState.ordinal() >= currConfigStepCheck.ordinal() ) {
+        if (configStepState.ordinal() >= currConfigStepCheck.ordinal() )
+        {
             opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "READY TO GO!");
 
             // may want to write configuration parameters to a file here if they are needed for teleop too!
             try {
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput(configFileName, Context.MODE_PRIVATE));
+                FileOutputStream out;
+                File file;
+
+                file = new File(configFileName);
+                out = new FileOutputStream(file);
+
+                if (!file.exists())
+                {
+                    file.createNewFile();
+                }
 
                 // write each configuration parameter as a string on its own line
+                byte[] contentInBytes = ("ALLIANCE = " + param.colorAlliance.name() + "\r\n").getBytes();
+                out.write(contentInBytes);
 
-                //outputStreamWriter.write(Boolean.toString(param.colorIsRed)+"\n");
+                contentInBytes = ("START_POSITION = " + param.autonType.name() + "\r\n").getBytes();
+                out.write(contentInBytes);
 
-                outputStreamWriter.write(Integer.toString(param.delayInSec)+"\n");
-                outputStreamWriter.write(param.autonType.name()+"\n");
+                contentInBytes = ("AUTO_DELAY = " + Integer.toString(param.delayInSec) + "\r\n").getBytes();
+                out.write(contentInBytes);
 
-                outputStreamWriter.close();
+                out.flush();
+                out.close();
             }
             catch (IOException e) {
                 opMode.telemetry.addData("Exception", "Configuration file write failed: " + e.toString());
