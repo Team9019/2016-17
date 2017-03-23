@@ -43,6 +43,7 @@ public class Configuration
 {
     private Telemetry telemetry;
     private Properties properties = new Properties();
+    private Properties propertiesmenu = new Properties();
 
     //Defaults are being set within the configuration to ensure that if the configs fail to load,
     //settings will still take place.  The configproperties.txt will override these defaults.
@@ -126,12 +127,15 @@ public class Configuration
 
             // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
             FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
+            FileInputStream inmenu = new FileInputStream("/storage/emulated/0/FIRST/configpropertiesmenu.txt");
 
             properties.load(in);
+            propertiesmenu.load(inmenu);
 
-            ALLIANCE = properties.getProperty("ALLIANCE");
-            START_POSITION = properties.getProperty("START_POSITION");
-            AUTO_DELAY = Integer.parseInt(properties.getProperty("AUTO_DELAY")) * 1000 ;
+            //ALLIANCE = properties.getProperty("ALLIANCE");
+            ALLIANCE = propertiesmenu.getProperty("ALLIANCE");
+            START_POSITION = propertiesmenu.getProperty("START_POSITION");
+            AUTO_DELAY = Integer.parseInt(propertiesmenu.getProperty("AUTO_DELAY")) * 1000 ;
 
             POWER_DRIVE = Double.parseDouble(properties.getProperty("POWER_DRIVE"));
             POWER_TURN = Double.parseDouble(properties.getProperty("POWER_TURN"));
