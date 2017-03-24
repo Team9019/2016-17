@@ -20,10 +20,11 @@ FUNCTION:
 @Disabled
 public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
-    private Hardware robot = new Hardware(telemetry);
+    //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
-    private Commands cmds = new Commands(telemetry,this);
-    private Initialize init = new Initialize(telemetry);
+    private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
+    //private Initialize init = new Initialize(telemetry);
+    private Commands cmds = new Commands(robot, this);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -31,12 +32,13 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 
-        robot.init(hardwareMap);
-
         configs.loadParameters();
 
-        //cmds.InitializeHW(robot);
-        init.InitializeHW(robot);
+        robot.init(hardwareMap);
+
+        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+
+        //init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
         telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");
@@ -70,7 +72,7 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 
         robot.motorCollect.setPower(1.0);
 
-        cmds.Shoot(robot);
+        cmds.Shoot();   //robot);
 
         robot.motorCollect.setPower(0);
 
@@ -85,7 +87,7 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
             //cmds.GyroDrive(robot, Configuration.POWER_DRIVE, 6, 0, 5.0);
         }
 
-        cmds.StopDriving(robot);
+        cmds.StopDriving(); //robot);
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();
