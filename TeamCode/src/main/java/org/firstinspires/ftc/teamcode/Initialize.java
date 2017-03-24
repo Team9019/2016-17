@@ -11,10 +11,14 @@ PURPOSE:
     (Separated from commands to allow OpMode to be passed to Commands class.)
 */
 
-public class Initialize extends LinearOpMode
+public class Initialize //extends LinearOpMode
 {
-    //private ElapsedTime runtime = new ElapsedTime();
-    //LinearOpMode opMode;
+    //Establish sub-classes with Constructor call
+    private Configuration configs = new Configuration(this.telemetry);
+
+    //Define local variables for parameters passed in
+    private Telemetry telemetry;
+    private Hardware robot;
 
     /* Constructor */
     public Initialize(Telemetry telemetry) //, LinearOpMode opMode)
@@ -23,12 +27,9 @@ public class Initialize extends LinearOpMode
         //this.opMode = opMode;
     }
 
-    public void runOpMode()
+    public void InitializeHW(Hardware inrobot)
     {
-    }
-
-    public void InitializeHW(Hardware robot)
-    {
+        robot =  inrobot;
         //runtime.reset();
 
         telemetry.addData("InitializeHW", "Beginning HW Initialization...");
@@ -72,7 +73,7 @@ public class Initialize extends LinearOpMode
         robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        idle();
+        //idle();
 
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -102,8 +103,8 @@ public class Initialize extends LinearOpMode
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
-        robot.servoLift.setPosition(Configuration.POS_CLOSED_LIFT_SERVO);
-        robot.servoTusk.setPosition(Configuration.POS_CLOSED_TUSK_SERVO);
+        robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
+        robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
 
         //telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
 
@@ -172,5 +173,4 @@ public class Initialize extends LinearOpMode
         telemetry.addData("InitializeHW", "Initialization HW Complete!");
         telemetry.update();
     }
-
 }

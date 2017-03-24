@@ -41,20 +41,21 @@ PURPOSE:
 
 public class Configuration
 {
+    //Define local variables for parameters passed in
     private Telemetry telemetry;
+
+    //Define variables local to the class
     private Properties properties = new Properties();
     private Properties propertiesmenu = new Properties();
-
-    //Defaults are being set within the configuration to ensure that if the configs fail to load,
-    //settings will still take place.  The configproperties.txt will override these defaults.
-
-    public static String ALLIANCE;
-    public static String START_POSITION;
-    public static int AUTO_DELAY;
 
     //*****************************************
     //Phone configurable settings:
     //*****************************************
+    //Match settings
+        public static String ALLIANCE;
+        public static String START_POSITION;
+        public static int AUTO_DELAY;
+
     //Motor Power
         public static double POWER_DRIVE;
         public static double POWER_TURN;
@@ -126,16 +127,19 @@ public class Configuration
             //System.out.println(Environment.getExternalStorageDirectory());
 
             // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
-            FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
-            FileInputStream inmenu = new FileInputStream("/storage/emulated/0/FIRST/configpropertiesmenu.txt");
 
-            properties.load(in);
+            //Read menu file
+            FileInputStream inmenu = new FileInputStream("/storage/emulated/0/FIRST/configpropertiesmenu.txt");
             propertiesmenu.load(inmenu);
 
             //ALLIANCE = properties.getProperty("ALLIANCE");
             ALLIANCE = propertiesmenu.getProperty("ALLIANCE");
             START_POSITION = propertiesmenu.getProperty("START_POSITION");
             AUTO_DELAY = Integer.parseInt(propertiesmenu.getProperty("AUTO_DELAY")) * 1000 ;
+
+            //Read configuration file
+            FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
+            properties.load(in);
 
             POWER_DRIVE = Double.parseDouble(properties.getProperty("POWER_DRIVE"));
             POWER_TURN = Double.parseDouble(properties.getProperty("POWER_TURN"));

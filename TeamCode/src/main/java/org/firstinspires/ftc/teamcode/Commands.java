@@ -12,24 +12,24 @@ PURPOSE:
     Define all movement commands
 */
 
-public class Commands extends LinearOpMode
+public class Commands //extends LinearOpMode
 {
-    private ElapsedTime runtime = new ElapsedTime();
+    //Define local variables for parameters passed in
     LinearOpMode opMode;
+    private Hardware robot;
+
+    //Define variables local to the class
+    private ElapsedTime runtime = new ElapsedTime();
 
     /* Constructor */
-    public Commands(Telemetry telemetry, LinearOpMode opMode)
+    //public Commands(Telemetry telemetry, LinearOpMode opMode)
+    public Commands(Hardware inrobot, LinearOpMode opMode)
     {
-        //can the Telemetry variable be removed and the command below be replaced with super.telemetry
-        this.telemetry = telemetry;
+        this.robot = inrobot;
         this.opMode = opMode;
     }
 
-    public void runOpMode()
-    {
-    }
-
-    public void EncoderDrive(Hardware robot,
+    public void EncoderDrive(//Hardware inrobot,
                              double speed,
                              double leftInches, double rightInches,
                              double timeoutS) //throws InterruptedException
@@ -39,8 +39,10 @@ public class Commands extends LinearOpMode
         int newLeftBackTarget;
         int newRightBackTarget;
 
-        telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Starting...");
-        telemetry.update();
+        //robot = inrobot;
+
+        opMode.telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Starting...");
+        opMode.telemetry.update();
 
         //System.out.println(Configuration.COUNTS_PER_INCH);
 
@@ -50,12 +52,12 @@ public class Commands extends LinearOpMode
         //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Display start position
-        telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
+        opMode.telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
                 robot.motorFrontLeft.getCurrentPosition(),
                 robot.motorFrontRight.getCurrentPosition(),
                 robot.motorBackLeft.getCurrentPosition(),
                 robot.motorBackRight.getCurrentPosition());
-        telemetry.update();
+        opMode.telemetry.update();
         //sleep(1500);
 
         // Ensure that the opmode is still active
@@ -68,9 +70,9 @@ public class Commands extends LinearOpMode
             newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * Configuration.COUNTS_PER_INCH);
 
             //Display target positions
-            telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
+            opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                    newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
-            telemetry.update();
+            opMode.telemetry.update();
             //sleep(1500);
 
             // Pass target position to motor controller
@@ -103,36 +105,36 @@ public class Commands extends LinearOpMode
                     )
             {
                 // Display positions for the driver.
-                telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :%7d",
+                opMode.telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :%7d",
                         robot.motorFrontLeft.getCurrentPosition(),
                         robot.motorFrontRight.getCurrentPosition(),
                         robot.motorBackLeft.getCurrentPosition(),
                         robot.motorBackRight.getCurrentPosition());
-                telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
+                opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
                         newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
-                telemetry.update();
+                opMode.telemetry.update();
 
                 //sleep(1000);
-                idle();
+                opMode.idle();
             }
 
             // Stop all motion;
-            StopDriving(robot);
+            StopDriving(); //robot);
 
             // Display current position
-            telemetry.addData("EncoderDrive", "> Final position of %7d :%7d :%7d :%7d",
+            opMode.telemetry.addData("EncoderDrive", "> Final position of %7d :%7d :%7d :%7d",
                     robot.motorFrontLeft.getCurrentPosition(),
                     robot.motorFrontRight.getCurrentPosition(),
                     robot.motorBackLeft.getCurrentPosition(),
                     robot.motorBackRight.getCurrentPosition());
-            telemetry.update();
+            opMode.telemetry.update();
             ///sleep(3000);
 
             robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            idle();
+            //idle();
 
             // Turn off RUN_TO_POSITION
             robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
@@ -141,31 +143,34 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //idle();   // optional pause after each move
         }
-        telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Complete!");
-        telemetry.update();
+        opMode.telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Complete!");
+        opMode.telemetry.update();
     }
 
-    public void EncoderTurn (Hardware robot, String LR, double Inches, double timeoutS)
+    public void EncoderTurn (//Hardware robot,
+                             String LR, double Inches, double timeoutS)
     {
-        telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Starting...");
-        telemetry.update();
+        opMode.telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Starting...");
+        opMode.telemetry.update();
 
         if (LR.equals("L"))
         {
-            EncoderDrive(robot, Configuration.POWER_TURN, -Inches, Inches, timeoutS);
+            //EncoderDrive(robot, Configuration.POWER_TURN, -Inches, Inches, timeoutS);
+            EncoderDrive(Configuration.POWER_TURN, -Inches, Inches, timeoutS);
         }
         else
         {
-            EncoderDrive(robot, Configuration.POWER_TURN, Inches, -Inches, timeoutS);
+            //EncoderDrive(robot, Configuration.POWER_TURN, Inches, -Inches, timeoutS);
+            EncoderDrive(Configuration.POWER_TURN, Inches, -Inches, timeoutS);
         }
-        telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Complete!");
-        telemetry.update();
+        opMode.telemetry.addData("EncoderTurn", "Turn " + LR + "(" + Inches + ") Complete!");
+        opMode.telemetry.update();
     }
 
-    public void Shoot(Hardware robot) //throws InterruptedException
+    public void Shoot() //Hardware robot) //throws InterruptedException
     {
-        telemetry.addData("LaunchNewBall", "Beginning Ball Launch ...");
-        telemetry.update();
+        opMode.telemetry.addData("LaunchNewBall", "Beginning Ball Launch ...");
+        opMode.telemetry.update();
 
         if (opMode.opModeIsActive())
         {
@@ -176,41 +181,41 @@ public class Commands extends LinearOpMode
             while (opMode.opModeIsActive() &&
                     runtime.milliseconds() < Configuration.TIME_LAUNCH)
             {
-                telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
-                telemetry.update();
+                opMode.telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
+                opMode.telemetry.update();
 
-                idle();
+                opMode.idle();
             }
 
             robot.motorLaunch.setPower(0);
         }
 
-        telemetry.addData("LaunchNewBall", "Ball Launch Complete!");
-        telemetry.update();
+        opMode.telemetry.addData("LaunchNewBall", "Ball Launch Complete!");
+        opMode.telemetry.update();
     }
 
-    public void StopDriving(Hardware robot)
+    public void StopDriving() //Hardware robot)
     {
-        telemetry.addData("Stop Drive", "Halting ...");
-        telemetry.update();
+        opMode.telemetry.addData("Stop Drive", "Halting ...");
+        opMode.telemetry.update();
 
         robot.motorFrontRight.setPower(0);
         robot.motorFrontLeft.setPower(0);
         robot.motorBackRight.setPower(0);
         robot.motorBackLeft.setPower(0);
 
-        telemetry.addData("Stop Drive", "Halt Complete!");
-        telemetry.update();
+        opMode.telemetry.addData("Stop Drive", "Halt Complete!");
+        opMode.telemetry.update();
     }
 
-    public void SenseBeacon(Hardware robot)
+    public void SenseBeacon() //Hardware robot)
     {
         boolean Searching = true;
         boolean BlueFound = false;
         boolean RedFound = false;
 
-        telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
-        telemetry.update();
+        opMode.telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
+        opMode.telemetry.update();
 
         //Initial button push
         //Replace with extender
@@ -224,16 +229,16 @@ public class Commands extends LinearOpMode
                 runtime.seconds() < 13
                 )
         {
-            telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-            telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            telemetry.update();
+            opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            opMode.telemetry.update();
 
             //Test for RED
             if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
             {
                 RedFound = true;
-                telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
-                telemetry.update();
+                opMode.telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
+                opMode.telemetry.update();
                 robot.devIM.setLED(1,true);     //Red
             }
 
@@ -241,8 +246,8 @@ public class Commands extends LinearOpMode
             if (robot.sensorColor.blue()>=Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue()<=Configuration.COLOR_BLUE_HIGH)
             {
                 BlueFound = true;
-                telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
-                telemetry.update();
+                opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
+                opMode.telemetry.update();
                 robot.devIM.setLED(0, true);    //Blue
             }
 
@@ -253,7 +258,7 @@ public class Commands extends LinearOpMode
                )
             {
                 //wait 6 seconds before determining whether to drive forward again (wrong color)
-                sleep(6000);
+                opMode.sleep(6000);
 
                 //Replace with extender
                 //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
@@ -263,11 +268,11 @@ public class Commands extends LinearOpMode
                 Searching= false;
             }
 
-            idle();
+            opMode.idle();
         }
 
-        telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
-        telemetry.update();
+        opMode.telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
+        opMode.telemetry.update();
     }
 
 //    public void DriveForward(Hardware robot, double power, int drivetime)
