@@ -13,10 +13,12 @@ FUNCTION:
 @TeleOp(name = "TeleOp", group = "TeleOp")
 public class TeleOpIterative extends OpMode
 {
-    private Hardware robot = new Hardware(telemetry);
+    //Establish sub-classes with Constructor call
+    //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
-    //private Commands cmds = new Commands(telemetry, this);
-    private Initialize init = new Initialize(telemetry);
+    private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
+    //private Initialize init = new Initialize(telemetry);
+    //private Commands cmds = new Commands(robot, this);
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -38,12 +40,13 @@ public class TeleOpIterative extends OpMode
         telemetry.addData("Initialization","Starting TeleOp Initialization ...");
         telemetry.update();
 
-        robot.init(hardwareMap);
-
         configs.loadParameters();
 
-        //cmds.InitializeHW(robot);
-        init.InitializeHW(robot);
+        robot.init(hardwareMap);
+
+        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+
+        //init.InitializeHW(robot);
 
         //put this here to ensure encoders are disabled for teleop
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

@@ -19,10 +19,11 @@ FUNCTION:
 //@Disabled
 public class W_Auto_Shoot_Only extends LinearOpMode
 {
-    private Hardware robot = new Hardware(telemetry);
+    //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
-    private Commands cmds = new Commands(telemetry,this);
-    private Initialize init = new Initialize(telemetry);
+    private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
+    //private Initialize init = new Initialize(telemetry);
+    private Commands cmds = new Commands(robot, this);
 
     private int TimeDebugSleep = 0;
 
@@ -32,14 +33,16 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 
-        robot.init(hardwareMap);
-
         configs.loadParameters();
 
-        init.InitializeHW(robot);
+        robot.init(hardwareMap);
 
-        telemetry.addData("Config", Configuration.START_POSITION + " Starting Position");
-        telemetry.addData("Config", Configuration.AUTO_DELAY /1000 + " Sec. Delay");
+        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+
+        //init.InitializeHW(robot);
+
+        telemetry.addData("Config", configs.START_POSITION + " Starting Position");
+        telemetry.addData("Config", configs.AUTO_DELAY /1000 + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
@@ -49,31 +52,33 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(Configuration.AUTO_DELAY);
+        sleep(configs.AUTO_DELAY);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
         sleep(TimeDebugSleep);
 
         //Move close enough to shoot balls
-        if (Configuration.START_POSITION.equals("LONG"))
+        if (configs.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_CORNER_TO_SHOOT, Configuration.DIST_CORNER_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(//robot,
+                    configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.DIST_SIDE_TO_SHOOT, Configuration.DIST_SIDE_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(//robot,
+                    configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
         }
         sleep(TimeDebugSleep);
 
-        robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
+        robot.motorLaunch.setPower(configs.POWER_LAUNCH);
 
         //Use delay until ball launch is ready for use
         sleep(2000);
 
         robot.motorCollect.setPower(1.0);
 
-        cmds.Shoot(robot);
+        cmds.Shoot();   //robot);
 
         robot.motorCollect.setPower(0);
         sleep(TimeDebugSleep);
