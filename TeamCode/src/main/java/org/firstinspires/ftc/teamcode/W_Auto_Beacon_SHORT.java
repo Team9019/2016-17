@@ -42,13 +42,13 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
 
@@ -79,6 +79,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.EncoderDrive(//robot,
                 configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
         sleep(TimeDebugSleep);
+
         cmds.EncoderDrive(//robot,
                 configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
         sleep(TimeDebugSleep);
@@ -95,13 +96,13 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
             cmds.EncoderTurn(//robot,
                              "L",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
-        //sleep(TimeDebugSleep);
-        sleep(3000);
+        sleep(TimeDebugSleep);
 
         //Drive to first beacon
         cmds.EncoderDrive(//robot,
                 configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1*Direction, configs.DIST_RAMP_TO_BEACON_1*Direction, 5.0);
         sleep(TimeDebugSleep);
+
         cmds.SenseBeacon(); //robot);
         sleep(TimeDebugSleep);
 
@@ -109,6 +110,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.EncoderDrive(//robot,
                 configs.POWER_DRIVE, configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), 5.0);
         sleep(TimeDebugSleep);
+
         cmds.EncoderDrive(//robot,
                 configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
         sleep(TimeDebugSleep);
@@ -158,7 +160,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.Shoot();   //robot);
 
         robot.motorCollect.setPower(0);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         //Drive to center
         cmds.EncoderDrive(//robot,
