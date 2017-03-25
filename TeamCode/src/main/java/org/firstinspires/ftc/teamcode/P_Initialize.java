@@ -11,7 +11,7 @@ PURPOSE:
     (Separated from commands to allow OpMode to be passed to Commands class.)
 */
 
-public class Initialize //extends LinearOpMode
+public class P_Initialize //extends LinearOpMode
 {
     //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(this.telemetry);
@@ -21,7 +21,7 @@ public class Initialize //extends LinearOpMode
     private Hardware robot;
 
     /* Constructor */
-    public Initialize(Telemetry telemetry) //, LinearOpMode opMode)
+    public P_Initialize(Telemetry telemetry) //, LinearOpMode opMode)
     {
         this.telemetry = telemetry;
         //this.opMode = opMode;
@@ -46,12 +46,12 @@ public class Initialize //extends LinearOpMode
         // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //  rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
-        robot.motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
+        //robot.motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         robot.motorBackRight.setDirection(DcMotor.Direction.REVERSE);
         robot.motorLaunch.setDirection(DcMotor.Direction.REVERSE);
 
-        robot.motorFrontLeft.setPower(0);
-        robot.motorFrontRight.setPower(0);
+        //robot.motorFrontLeft.setPower(0);
+        //robot.motorFrontRight.setPower(0);
         robot.motorBackLeft.setPower(0);
         robot.motorBackRight.setPower(0);
 
@@ -69,19 +69,19 @@ public class Initialize //extends LinearOpMode
         telemetry.addData("InitializeHW", "> Resetting Encoders...");
         telemetry.update();
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //idle();
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        robot.motorFrontLeft.setMaxSpeed(3000);
-        robot.motorFrontRight.setMaxSpeed(3000);
+        //robot.motorFrontLeft.setMaxSpeed(3000);
+        //robot.motorFrontRight.setMaxSpeed(3000);
         robot.motorBackLeft.setMaxSpeed(3000);
         robot.motorBackRight.setMaxSpeed(3000);
 
@@ -100,7 +100,7 @@ public class Initialize //extends LinearOpMode
         /* ******************************************************/
         // Initialize Servos
         /* ******************************************************/
-        telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
+        telemetry.addData("P_Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
         robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);

@@ -26,9 +26,9 @@ public class Hardware
 
     //Define variables local to the class
     //Motors
-        DcMotor motorFrontLeft=null;
+        //DcMotor motorFrontLeft=null;
         DcMotor motorBackLeft=null;
-        DcMotor motorFrontRight=null;
+        //DcMotor motorFrontRight=null;
         DcMotor motorBackRight=null;
 
         DcMotor motorLaunch=null;
@@ -56,7 +56,7 @@ public class Hardware
         //this.hwMap = ahwMap;
     }
 
-    /* Initialize standard Hardware interfaces */
+    /* P_Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap)
     {
         telemetry.addData("Hardware", "Begin Hardware Definition...");
@@ -65,9 +65,9 @@ public class Hardware
         hwMap = ahwMap;
 
         // Define Motors
-            motorFrontLeft = hwMap.dcMotor.get("front_left");
+            //motorFrontLeft = hwMap.dcMotor.get("front_left");
             motorBackLeft = hwMap.dcMotor.get("back_left");
-            motorFrontRight = hwMap.dcMotor.get("front_right");
+            //motorFrontRight = hwMap.dcMotor.get("front_right");
             motorBackRight = hwMap.dcMotor.get("back_right");
 
             motorLaunch = hwMap.dcMotor.get("shoot");
@@ -103,7 +103,7 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // Initialize motors to off
+        // P_Initialize motors to off
         /* ******************************************************/
         telemetry.addData("InitializeHW", "> Initializing Motors...");
         telemetry.update();
@@ -113,12 +113,12 @@ public class Hardware
         // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         //  rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
-        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
+        //motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
         motorBackRight.setDirection(DcMotor.Direction.REVERSE);
         motorLaunch.setDirection(DcMotor.Direction.REVERSE);
 
-        motorFrontLeft.setPower(0);
-        motorFrontRight.setPower(0);
+        //motorFrontLeft.setPower(0);
+        //motorFrontRight.setPower(0);
         motorBackLeft.setPower(0);
         motorBackRight.setPower(0);
 
@@ -131,24 +131,24 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // Initialize Encoders
+        // P_Initialize Encoders
         /* ******************************************************/
         telemetry.addData("InitializeHW", "> Resetting Encoders...");
         telemetry.update();
 
-        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //idle();
 
-        motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        motorFrontLeft.setMaxSpeed(3000);
-        motorFrontRight.setMaxSpeed(3000);
+        //motorFrontLeft.setMaxSpeed(3000);
+        //motorFrontRight.setMaxSpeed(3000);
         motorBackLeft.setMaxSpeed(3000);
         motorBackRight.setMaxSpeed(3000);
 
@@ -165,7 +165,7 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // Initialize Servos
+        // P_Initialize Servos
         /* ******************************************************/
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();

@@ -42,10 +42,13 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
+        sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
+        sleep(TimeDebugSleep);
 
         robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
 

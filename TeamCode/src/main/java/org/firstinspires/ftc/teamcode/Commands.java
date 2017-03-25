@@ -52,9 +52,9 @@ public class Commands //extends LinearOpMode
         //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Display start position
-        opMode.telemetry.addData("EncoderDrive", "> Starting at %7d :%7d :%7d :%7d",
-                robot.motorFrontLeft.getCurrentPosition(),
-                robot.motorFrontRight.getCurrentPosition(),
+        opMode.telemetry.addData("EncoderDrive", "> Starting at %7d :%7d",
+                //robot.motorFrontLeft.getCurrentPosition(),
+                //robot.motorFrontRight.getCurrentPosition(),
                 robot.motorBackLeft.getCurrentPosition(),
                 robot.motorBackRight.getCurrentPosition());
         opMode.telemetry.update();
@@ -64,54 +64,56 @@ public class Commands //extends LinearOpMode
         if (opMode.opModeIsActive())
         {
             // Calculate new target position
-            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
-            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) (rightInches * Configuration.COUNTS_PER_INCH);
+            //newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
+            //newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) (rightInches * Configuration.COUNTS_PER_INCH);
             newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
             newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * Configuration.COUNTS_PER_INCH);
 
             //Display target positions
-            opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
-                   newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
+            opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d",
+                   //newLeftFrontTarget,newRightFrontTarget,
+                    newLeftBackTarget, newRightBackTarget);
             opMode.telemetry.update();
             //sleep(1500);
 
             // Pass target position to motor controller
-            robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
-            robot.motorFrontRight.setTargetPosition(newRightFrontTarget);
+            //robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
+            //robot.motorFrontRight.setTargetPosition(newRightFrontTarget);
             robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
             robot.motorBackRight.setTargetPosition(newRightBackTarget);
 
             // Turn On RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
             // reset the timeout time and start motion.
             runtime.reset();
             speed = Math.abs(speed);
-            robot.motorFrontLeft.setPower(speed);
-            robot.motorFrontRight.setPower(speed);
+            //robot.motorFrontLeft.setPower(speed);
+            //robot.motorFrontRight.setPower(speed);
             robot.motorBackLeft.setPower(speed);
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             while ( opMode.opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
-                    robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() &&
+                    //robot.motorFrontLeft.isBusy() &&
+                    //robot.motorFrontRight.isBusy() &&
                     robot.motorBackLeft.isBusy() &&
                     robot.motorBackRight.isBusy()
                     )
             {
                 // Display positions for the driver.
-                opMode.telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :%7d",
-                        robot.motorFrontLeft.getCurrentPosition(),
-                        robot.motorFrontRight.getCurrentPosition(),
+                opMode.telemetry.addData("EncoderDrive", "> Currently at %7d :%7d",
+                        //robot.motorFrontLeft.getCurrentPosition(),
+                        //robot.motorFrontRight.getCurrentPosition(),
                         robot.motorBackLeft.getCurrentPosition(),
                         robot.motorBackRight.getCurrentPosition());
-                opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :%7d",
-                        newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
+                opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d",
+                        //newLeftFrontTarget, newRightFrontTarget,
+                        newLeftBackTarget, newRightBackTarget);
                 opMode.telemetry.update();
 
                 //sleep(1000);
@@ -122,23 +124,23 @@ public class Commands //extends LinearOpMode
             StopDriving(); //robot);
 
             // Display current position
-            opMode.telemetry.addData("EncoderDrive", "> Final position of %7d :%7d :%7d :%7d",
-                    robot.motorFrontLeft.getCurrentPosition(),
-                    robot.motorFrontRight.getCurrentPosition(),
+            opMode.telemetry.addData("EncoderDrive", "> Final position of %7d :%7d",
+                    //robot.motorFrontLeft.getCurrentPosition(),
+                    //robot.motorFrontRight.getCurrentPosition(),
                     robot.motorBackLeft.getCurrentPosition(),
                     robot.motorBackRight.getCurrentPosition());
             opMode.telemetry.update();
             ///sleep(3000);
 
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //idle();
 
             // Turn off RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             //idle();   // optional pause after each move
@@ -199,8 +201,8 @@ public class Commands //extends LinearOpMode
         opMode.telemetry.addData("Stop Drive", "Halting ...");
         opMode.telemetry.update();
 
-        robot.motorFrontRight.setPower(0);
-        robot.motorFrontLeft.setPower(0);
+        //robot.motorFrontRight.setPower(0);
+        //robot.motorFrontLeft.setPower(0);
         robot.motorBackRight.setPower(0);
         robot.motorBackLeft.setPower(0);
 

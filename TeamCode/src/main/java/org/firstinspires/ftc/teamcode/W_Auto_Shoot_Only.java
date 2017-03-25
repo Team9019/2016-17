@@ -34,10 +34,13 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
+        sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
+        sleep(TimeDebugSleep);
 
         robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
 

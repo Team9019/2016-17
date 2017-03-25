@@ -34,10 +34,13 @@ public class W_Auto_Center_Park extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
+        sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
+        sleep(TimeDebugSleep);
 
         robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
 
