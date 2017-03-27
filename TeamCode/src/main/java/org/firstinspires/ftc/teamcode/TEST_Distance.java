@@ -42,14 +42,22 @@ public class TEST_Distance extends LinearOpMode
 
         waitForStart();
 
-        //***** Place test command here *****
+        //***********************************
+        //Test push servo
+            robot.servoPusher.setPosition(configs.POS_OUT_PUSHER_SERVO);
+            sleep(1000);
+            robot.servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
 
-            //cmds.EncoderDrive(robot, configs.DRIVE_POWER, configs.LONG_DIST_TO_SHOOT, configs.LONG_DIST_TO_SHOOT, 5.0);
-            //cmds.EncoderDrive(robot, configs.POWER_DRIVE, 70, 70, 5.0);
-        cmds.EncoderDrive(configs.POWER_DRIVE, 70, 70, 5.0);
+        //***********************************
+        //Test drive for 70 inches
+            //cmds.EncoderDrive(configs.POWER_DRIVE, 70, 70, 5.0);
+
+        //***********************************
+        //Test sense beacon
             //cmds.SenseBeacon(robot);
 
         //***********************************
+
         sleep(TimeDebugSleep);
 
         cmds.StopDriving(); //robot);

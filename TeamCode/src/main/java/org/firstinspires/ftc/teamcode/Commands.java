@@ -29,6 +29,118 @@ public class Commands //extends LinearOpMode
         this.opMode = opMode;
     }
 
+    public void ExtendPusher() {
+        opMode.telemetry.addData("ExtendPusher", "Extend Pusher Starting...");
+        opMode.telemetry.update();
+
+        runtime.reset();
+
+        while (opMode.opModeIsActive() &&
+                runtime.seconds() < 1)
+        {
+            robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
+            opMode.idle();
+        }
+
+        robot.servoPusher.setPosition(0.5);
+
+        opMode.telemetry.addData("ExtendPusher", "Extend Pusher Complete!");
+        opMode.telemetry.update();
+    }
+
+    public void RetractPusher()
+    {
+        opMode.telemetry.addData("RetractPusher", "Retract Pusher Starting...");
+        opMode.telemetry.update();
+
+        runtime.reset();
+
+        while (opMode.opModeIsActive() &&
+                runtime.seconds() < 1)
+        {
+            robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
+            opMode.idle();
+        }
+
+        robot.servoPusher.setPosition(0.5);
+
+        opMode.telemetry.addData("RetractPusher", "Retract Pusher Complete!");
+        opMode.telemetry.update();
+    }
+
+    public void SenseBeacon() //Hardware robot)
+    {
+        boolean Searching = true;
+        boolean BlueFound = false;
+        boolean RedFound = false;
+
+        opMode.telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
+        opMode.telemetry.update();
+
+        //Initial button push
+        //Replace with extender
+        //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
+        //ExtendPusher();
+        //opMode.sleep(500);
+        //RetractPusher();
+
+        runtime.reset();
+
+        while ( opMode.opModeIsActive() &&
+                robot.sensorColor.alpha() < 20 &&
+                Searching &&
+                runtime.seconds() < 13
+                )
+        {
+            opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            opMode.telemetry.update();
+
+            //Test for RED
+            if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
+            {
+                RedFound = true;
+                opMode.telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
+                opMode.telemetry.update();
+                robot.devIM.setLED(1,true);     //Red
+            }
+
+            //Test for BLUE
+            if (robot.sensorColor.blue()>=Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue()<=Configuration.COLOR_BLUE_HIGH)
+            {
+                BlueFound = true;
+                opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
+                opMode.telemetry.update();
+                robot.devIM.setLED(0, true);    //Blue
+            }
+
+            //If beacon is the wrong color wait then push the button.
+            //If beacon is the correct color, turn off searching to allow moving on
+            if (    (   (RedFound) && (Configuration.ALLIANCE.equals("BLUE"))) |
+                    (   (BlueFound) && (Configuration.ALLIANCE.equals("RED")))
+                    )
+            {
+                //wait 6 seconds before determining whether to drive forward again (wrong color)
+                opMode.sleep(6000);
+
+                //Replace with extender
+                //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
+                //ExtendPusher();
+                //opMode.sleep(500);
+                //RetractPusher();
+            }
+            else
+            {
+                Searching= false;
+            }
+
+            opMode.idle();
+        }
+
+        opMode.telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
+        opMode.telemetry.update();
+    }
+
     public void EncoderDrive(//Hardware inrobot,
                              double speed,
                              double leftInches, double rightInches,
@@ -210,72 +322,7 @@ public class Commands //extends LinearOpMode
         opMode.telemetry.update();
     }
 
-    public void SenseBeacon() //Hardware robot)
-    {
-        boolean Searching = true;
-        boolean BlueFound = false;
-        boolean RedFound = false;
 
-        opMode.telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
-        opMode.telemetry.update();
-
-        //Initial button push
-        //Replace with extender
-        //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
-
-        runtime.reset();
-
-        while ( opMode.opModeIsActive() &&
-                robot.sensorColor.alpha() < 20 &&
-                Searching &&
-                runtime.seconds() < 13
-                )
-        {
-            opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-            opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            opMode.telemetry.update();
-
-            //Test for RED
-            if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
-            {
-                RedFound = true;
-                opMode.telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
-                opMode.telemetry.update();
-                robot.devIM.setLED(1,true);     //Red
-            }
-
-            //Test for BLUE
-            if (robot.sensorColor.blue()>=Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue()<=Configuration.COLOR_BLUE_HIGH)
-            {
-                BlueFound = true;
-                opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
-                opMode.telemetry.update();
-                robot.devIM.setLED(0, true);    //Blue
-            }
-
-            //If beacon is the wrong color wait then push the button.
-            //If beacon is the correct color, turn off searching to allow moving on
-            if (    (   (RedFound) && (Configuration.ALLIANCE.equals("BLUE"))) |
-                    (   (BlueFound) && (Configuration.ALLIANCE.equals("RED")))
-               )
-            {
-                //wait 6 seconds before determining whether to drive forward again (wrong color)
-                opMode.sleep(6000);
-
-                //Replace with extender
-                //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
-            }
-            else
-            {
-                Searching= false;
-            }
-
-            opMode.idle();
-        }
-
-        opMode.telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
-        opMode.telemetry.update();
-    }
 
 //    public void DriveForward(Hardware robot, double power, int drivetime)
 //    {

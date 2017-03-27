@@ -1,15 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
-//import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+//import com.qualcomm.hardware.hitechnic.HiTechnicNxtServoController;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 /*
 PURPOSE:
     Tie the hardware variables to the hardware defined in the FTC Robot Controller app on the phone.
@@ -41,6 +39,8 @@ public class Hardware
     //Servos
         Servo servoLift=null;
         Servo servoTusk=null;
+        //HiTechnicNxtServoController servoPusher=null;
+        Servo servoPusher=null;
 
     //Sensors
         ModernRoboticsI2cGyro sensorGyro=null;
@@ -80,6 +80,8 @@ public class Hardware
         // Define Servos
             servoLift = hwMap.servo.get("fork");
             servoTusk = hwMap.servo.get("tusk");
+            //servoPusher = (HiTechnicNxtServoController) hwMap.get("pusher");
+            servoPusher = hwMap.servo.get("pusher");
 
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
@@ -103,7 +105,7 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // P_Initialize motors to off
+        // Initialize motors to off
         /* ******************************************************/
         telemetry.addData("InitializeHW", "> Initializing Motors...");
         telemetry.update();
@@ -131,7 +133,7 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // P_Initialize Encoders
+        // Initialize Encoders
         /* ******************************************************/
         telemetry.addData("InitializeHW", "> Resetting Encoders...");
         telemetry.update();
@@ -165,13 +167,14 @@ public class Hardware
         telemetry.update();
 
         /* ******************************************************/
-        // P_Initialize Servos
+        // Initialize Servos
         /* ******************************************************/
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
         servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
         servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
+        servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
 
         //telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
 
