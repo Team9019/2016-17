@@ -152,8 +152,8 @@ public class Configuration
             POS_OPEN_LIFT_SERVO = Double.parseDouble(properties.getProperty("POS_OPEN_LIFT_SERVO"));
             POS_CLOSED_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_CLOSED_TUSK_SERVO"));
             POS_OPEN_TUSK_SERVO = Double.parseDouble(properties.getProperty("POS_OPEN_TUSK_SERVO"));
-            POS_IN_PUSHER_SERVO = Integer.parseInt(properties.getProperty("POS_IN_PUSHER_SERVO"));
-            POS_OUT_PUSHER_SERVO = Integer.parseInt(properties.getProperty("POS_OUT_PUSHER_SERVO"));
+            POS_IN_PUSHER_SERVO = Double.parseDouble(properties.getProperty("POS_IN_PUSHER_SERVO"));
+            POS_OUT_PUSHER_SERVO = Double.parseDouble(properties.getProperty("POS_OUT_PUSHER_SERVO"));
 
             TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH")) * 1000;
 
