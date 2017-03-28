@@ -14,7 +14,7 @@ public class TEST_Distance extends LinearOpMode
     //private Initialize init = new Initialize(telemetry);
     private Commands cmds = new Commands(robot, this);
 
-    private int TimeDebugSleep = 1500;
+    private int TimeDebugSleep = 2500;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -32,7 +32,7 @@ public class TEST_Distance extends LinearOpMode
         sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         telemetry.addData("Config", configs.ALLIANCE + " Alliance");
         telemetry.addData("Config", configs.START_POSITION + " Starting Position");
