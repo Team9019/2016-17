@@ -172,9 +172,9 @@ public class Hardware
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
+        servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
         servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
         servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
-        servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
 
         //telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
 
