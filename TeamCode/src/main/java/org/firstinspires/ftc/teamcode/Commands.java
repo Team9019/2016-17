@@ -29,20 +29,21 @@ public class Commands //extends LinearOpMode
         this.opMode = opMode;
     }
 
-    public void ExtendPusher() {
+    public void ExtendPusher()
+    {
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Starting...");
         opMode.telemetry.update();
 
-        runtime.reset();
+        //runtime.reset();
 
-        while (opMode.opModeIsActive() &&
-                runtime.seconds() < 1)
-        {
+        //while (opMode.opModeIsActive() &&
+        //        runtime.seconds() < 1)
+        //{
             robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
-            opMode.idle();
-        }
+        //    opMode.idle();
+        //}
 
-        robot.servoPusher.setPosition(0.5);
+        //robot.servoPusher.setPosition(0.5);
 
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Complete!");
         opMode.telemetry.update();
@@ -53,16 +54,16 @@ public class Commands //extends LinearOpMode
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Starting...");
         opMode.telemetry.update();
 
-        runtime.reset();
+        //runtime.reset();
 
-        while (opMode.opModeIsActive() &&
-                runtime.seconds() < 1)
-        {
+        //while (opMode.opModeIsActive() &&
+        //        runtime.seconds() < 1)
+        //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-            opMode.idle();
-        }
+        //    opMode.idle();
+        //}
 
-        robot.servoPusher.setPosition(0.5);
+        //robot.servoPusher.setPosition(0.5);
 
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Complete!");
         opMode.telemetry.update();
@@ -80,9 +81,9 @@ public class Commands //extends LinearOpMode
         //Initial button push
         //Replace with extender
         //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
-        //ExtendPusher();
-        //opMode.sleep(500);
-        //RetractPusher();
+        ExtendPusher();
+        opMode.sleep(500);
+        RetractPusher();
 
         runtime.reset();
 
@@ -125,9 +126,9 @@ public class Commands //extends LinearOpMode
 
                 //Replace with extender
                 //EncoderDrive(robot, Configuration.POWER_APPROACH, 3, 3, 3.0);
-                //ExtendPusher();
-                //opMode.sleep(500);
-                //RetractPusher();
+                ExtendPusher();
+                opMode.sleep(500);
+                RetractPusher();
             }
             else
             {

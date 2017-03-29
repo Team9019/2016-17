@@ -14,7 +14,7 @@ public class TEST_Distance extends LinearOpMode
     //private Initialize init = new Initialize(telemetry);
     private Commands cmds = new Commands(robot, this);
 
-    private int TimeDebugSleep = 2500;
+    private int TimeDebugSleep = 1500;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -44,13 +44,13 @@ public class TEST_Distance extends LinearOpMode
 
         //***********************************
         //Test push servo
-            robot.servoPusher.setPosition(configs.POS_OUT_PUSHER_SERVO);
-            sleep(1000);
-            robot.servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
+            //cmds.ExtendPusher();
+            //sleep(1000);
+            //cmds.RetractPusher();
 
         //***********************************
         //Test drive for 70 inches
-            //cmds.EncoderDrive(configs.POWER_DRIVE, 70, 70, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, 70, 70, 5.0);
 
         //***********************************
         //Test sense beacon
