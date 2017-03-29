@@ -67,7 +67,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         if(configs.ALLIANCE.equals("BLUE"))
         {

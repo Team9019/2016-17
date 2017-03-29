@@ -80,7 +80,6 @@ public class Hardware
         // Define Servos
             servoLift = hwMap.servo.get("fork");
             servoTusk = hwMap.servo.get("tusk");
-            //servoPusher = (HiTechnicNxtServoController) hwMap.get("pusher");
             servoPusher = hwMap.servo.get("pusher");
 
         // Define Sensors
