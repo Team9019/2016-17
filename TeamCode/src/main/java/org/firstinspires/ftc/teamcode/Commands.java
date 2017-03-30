@@ -40,7 +40,7 @@ public class Commands //extends LinearOpMode
         //        runtime.seconds() < 1)
         //{
             robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
-        //    opMode.idle();
+            opMode.idle();
         //}
 
         //robot.servoPusher.setPosition(0.5);
@@ -60,7 +60,7 @@ public class Commands //extends LinearOpMode
         //        runtime.seconds() < 1)
         //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-        //    opMode.idle();
+            opMode.idle();
         //}
 
         //robot.servoPusher.setPosition(0.5);

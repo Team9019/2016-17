@@ -111,11 +111,11 @@ public class TeleOpIterative extends OpMode
             robot.servoLift.setPosition(configs.POS_OPEN_LIFT_SERVO);
             robot.servoTusk.setPosition(configs.POS_OPEN_TUSK_SERVO);
         }
-        else
-        {
-            robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
-            robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
-        }
+        //else
+        //{
+        //    robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
+        //    robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
+        //}
 
         //Alternate driver
         if (gamepad2.b)
@@ -125,6 +125,12 @@ public class TeleOpIterative extends OpMode
         else
         {
             robot.sensorColor.enableLed(false);
+        }
+
+        if (gamepad2.left_bumper)
+        {
+            //robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
+            robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
         }
 
         if (gamepad2.right_bumper)

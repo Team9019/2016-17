@@ -23,13 +23,13 @@ public class TEST_Distance extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         //init.InitializeHW(robot);
         //sleep(TimeDebugSleep);
