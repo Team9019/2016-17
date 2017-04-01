@@ -1,14 +1,13 @@
 package org.firstinspires.ftc.teamcode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 /*
 PURPOSE:
-    Sets variables with constant values.  Values here are overriden by configproperties.txt (on phone).
+    Values are assigned by configproperties.txt (on robot phone).
     All variables read with getProperies MUST be set in configproperties.
 
 #ALLIANCE:              RED or BLUE
@@ -36,7 +35,6 @@ PURPOSE:
 #RED_COLOR_HIGH         Color:  Red range high
 #BLUE_COLOR_LOW         Color:  Blue range low
 #BLUE_COLOR_HIGH        Color:  Blue range high
-
 */
 
 public class Configuration
@@ -91,10 +89,10 @@ public class Configuration
 
         public static double INCHES_NINETY_DEGREE_TURN;
 
-        public static int COLOR_RED_LOW = 3;
-        public static int COLOR_RED_HIGH = 8;
-        public static int COLOR_BLUE_LOW = 1;
-        public static int COLOR_BLUE_HIGH = 2;
+        public static int COLOR_RED_LOW;
+        public static int COLOR_RED_HIGH;
+        public static int COLOR_BLUE_LOW;
+        public static int COLOR_BLUE_HIGH;
 
     //*****************************************
     //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
@@ -128,16 +126,15 @@ public class Configuration
             //System.out.println(System.getenv());
             //System.out.println(Environment.getExternalStorageDirectory());
 
-            // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
+            // ** Requires configproperties.Txt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
 
             //Read menu file
             FileInputStream inmenu = new FileInputStream("/storage/emulated/0/FIRST/configpropertiesmenu.txt");
             propertiesmenu.load(inmenu);
 
-            //ALLIANCE = properties.getProperty("ALLIANCE");
             ALLIANCE = propertiesmenu.getProperty("ALLIANCE");
             START_POSITION = propertiesmenu.getProperty("START_POSITION");
-            AUTO_DELAY = Integer.parseInt(propertiesmenu.getProperty("AUTO_DELAY")) * 1000 ;
+            AUTO_DELAY = Integer.parseInt(propertiesmenu.getProperty("AUTO_DELAY")) ;
 
             //Read configuration file
             FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");

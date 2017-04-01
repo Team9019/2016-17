@@ -36,7 +36,7 @@ public class P_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 
         robot.init(hardwareMap);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        robot.SetDefaults(hardwareMap); //, configs);    //hardwareMap);
 
         //init.InitializeHW(robot);
 

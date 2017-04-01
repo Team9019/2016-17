@@ -16,8 +16,6 @@ public class TeleOpIterative extends OpMode
     //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
     private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
-    //private Initialize init = new Initialize(telemetry);
-    //private Commands cmds = new Commands(robot, this);
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -43,9 +41,7 @@ public class TeleOpIterative extends OpMode
 
         robot.init(hardwareMap);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
-
-        //init.InitializeHW(robot);
+        robot.SetDefaults(hardwareMap); //, configs);
 
         //put this here to ensure encoders are disabled for teleop
         //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -93,8 +89,8 @@ public class TeleOpIterative extends OpMode
 
         //Apply button settings to robot
             //robot.motorFrontLeft.setPower(LeftFY);
-            robot.motorBackLeft.setPower(LeftBY);
             //robot.motorFrontRight.setPower(RightFY);
+            robot.motorBackLeft.setPower(LeftBY);
             robot.motorBackRight.setPower(RightBY);
 
             robot.motorCollect.setPower(Collect);
@@ -103,7 +99,6 @@ public class TeleOpIterative extends OpMode
 
             robot.motorLiftLeft.setPower(LiftY);
             robot.motorLiftRight.setPower(LiftY);
-
 
         //Main driver - servo controls
         if (gamepad1.right_bumper)

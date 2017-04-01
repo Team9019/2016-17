@@ -21,8 +21,7 @@ public class W_Auto_Center_Park extends LinearOpMode
 {
     //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
-    private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
-    //private Initialize init = new Initialize(telemetry);
+    private Hardware robot = new Hardware(telemetry);
     private Commands cmds = new Commands(robot, this);
 
     private int TimeDebugSleep = 0;
@@ -34,18 +33,16 @@ public class W_Auto_Center_Park extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
-        sleep(TimeDebugSleep);
-
-        //init.InitializeHW(robot);
+        robot.SetDefaults(hardwareMap); //, configs);
+        //sleep(TimeDebugSleep);
 
         telemetry.addData("Config", configs.START_POSITION + " Starting Position");
-        telemetry.addData("Config", configs.AUTO_DELAY /1000 + " Sec. Delay");
+        telemetry.addData("Config", configs.AUTO_DELAY + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
@@ -64,13 +61,11 @@ public class W_Auto_Center_Park extends LinearOpMode
         //Move close enough to shoot balls
         if (configs.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(//robot,
-                    configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(//robot,
-                    configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
         }
         sleep(TimeDebugSleep);
 
@@ -81,7 +76,7 @@ public class W_Auto_Center_Park extends LinearOpMode
 
         robot.motorCollect.setPower(1.0);
 
-        cmds.Shoot();   //robot);
+        cmds.Shoot();
 
         robot.motorCollect.setPower(0);
         sleep(TimeDebugSleep);
@@ -89,18 +84,15 @@ public class W_Auto_Center_Park extends LinearOpMode
         //Drive to center
         if (configs.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(//robot,
-                    configs.POWER_DRIVE, configs.DIST_CORNER_TO_PARK, configs.DIST_CORNER_TO_PARK, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_PARK, configs.DIST_CORNER_TO_PARK, 5.0);
         }
         else
         {
-            cmds.EncoderDrive(//robot,
-                    configs.POWER_DRIVE, configs.DIST_SIDE_TO_PARK, configs.DIST_SIDE_TO_PARK, 5.0);
-            //cmds.EncoderDrive(robot, configs.DRIVE_POWER, 6, 6, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_PARK, configs.DIST_SIDE_TO_PARK, 5.0);
         }
         sleep(TimeDebugSleep);
 
-        cmds.StopDriving(); //robot);
+        cmds.StopDriving();
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();

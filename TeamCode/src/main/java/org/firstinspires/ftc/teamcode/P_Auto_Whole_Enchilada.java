@@ -40,7 +40,7 @@ public class P_Auto_Whole_Enchilada extends LinearOpMode
 
         robot.init(hardwareMap);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        robot.SetDefaults(hardwareMap); //, configs);    //hardwareMap);
 
         //init.InitializeHW(robot);
 

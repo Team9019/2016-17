@@ -40,7 +40,7 @@ public class P_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
 
         robot.init(hardwareMap);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        robot.SetDefaults(hardwareMap); //, configs);    //hardwareMap);
 
         //init.InitializeHW(robot);
 

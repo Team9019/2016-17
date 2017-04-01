@@ -39,7 +39,7 @@ public class SR_Auto_Beacon_SHORT extends LinearOpMode {
 
         robot.init(hardwareMap);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
+        robot.SetDefaults(hardwareMap); //, configs);    //hardwareMap);
 
         //init.InitializeHW(robot);
 
