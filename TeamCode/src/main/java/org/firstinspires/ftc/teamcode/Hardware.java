@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
-//import com.qualcomm.hardware.hitechnic.HiTechnicNxtServoController;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 /*
 PURPOSE:
@@ -20,13 +19,13 @@ public class Hardware
     private HardwareMap hwMap = null;
 
     //Establish sub-classes with Constructor call
-    private Configuration configs = new Configuration(telemetry);
+    //private Configuration configs = new Configuration(telemetry);
 
     //Define variables local to the class
     //Motors
         //DcMotor motorFrontLeft=null;
-        DcMotor motorBackLeft=null;
         //DcMotor motorFrontRight=null;
+        DcMotor motorBackLeft=null;
         DcMotor motorBackRight=null;
 
         DcMotor motorLaunch=null;
@@ -39,7 +38,6 @@ public class Hardware
     //Servos
         Servo servoLift=null;
         Servo servoTusk=null;
-        //HiTechnicNxtServoController servoPusher=null;
         Servo servoPusher=null;
 
     //Sensors
@@ -56,7 +54,7 @@ public class Hardware
         //this.hwMap = ahwMap;
     }
 
-    /* P_Initialize standard Hardware interfaces */
+    /* Initialize standard Hardware interfaces */
     public void init(HardwareMap ahwMap)
     {
         telemetry.addData("Hardware", "Begin Hardware Definition...");
@@ -66,8 +64,8 @@ public class Hardware
 
         // Define Motors
             //motorFrontLeft = hwMap.dcMotor.get("front_left");
-            motorBackLeft = hwMap.dcMotor.get("back_left");
             //motorFrontRight = hwMap.dcMotor.get("front_right");
+            motorBackLeft = hwMap.dcMotor.get("back_left");
             motorBackRight = hwMap.dcMotor.get("back_right");
 
             motorLaunch = hwMap.dcMotor.get("shoot");
@@ -94,11 +92,9 @@ public class Hardware
         telemetry.update();
     }
 
-    public void SetDefaults(HardwareMap ahwMap, Configuration configs) // Configuration configs)   //HardwareMap ahwMap)
+    public void SetDefaults(HardwareMap ahwMap) // Configuration configs)   //HardwareMap ahwMap)
     {
         hwMap = ahwMap;
-        //robot =  inrobot;
-        //runtime.reset();
 
         telemetry.addData("InitializeHW", "Beginning HW Initialization...");
         telemetry.update();
@@ -150,8 +146,8 @@ public class Hardware
 
         //motorFrontLeft.setMaxSpeed(3000);
         //motorFrontRight.setMaxSpeed(3000);
-        motorBackLeft.setMaxSpeed(3000);
-        motorBackRight.setMaxSpeed(3000);
+        //motorBackLeft.setMaxSpeed(3000);
+        //motorBackRight.setMaxSpeed(3000);
 
         //telemetry.addData
         //        ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
@@ -171,11 +167,9 @@ public class Hardware
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
-        servoPusher.setPosition(configs.POS_IN_PUSHER_SERVO);
-        servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
-        servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
-
-        //telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
+        servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
+        servoLift.setPosition(Configuration.POS_CLOSED_LIFT_SERVO);
+        servoTusk.setPosition(Configuration.POS_CLOSED_TUSK_SERVO);
 
         telemetry.addData("InitializeHW", "> Initializing Servo Positions Complete!");
         telemetry.update();
