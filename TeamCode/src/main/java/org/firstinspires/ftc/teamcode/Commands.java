@@ -45,7 +45,7 @@ public class Commands
         opMode.telemetry.update();
 
         robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-//        opMode.sleep(1500);
+        opMode.sleep(1500);
 
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Complete!");
         opMode.telemetry.update();

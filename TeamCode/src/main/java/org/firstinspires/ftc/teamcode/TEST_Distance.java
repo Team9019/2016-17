@@ -40,7 +40,9 @@ public class TEST_Distance extends LinearOpMode
         //***********************************
         //Test push servo
             cmds.ExtendPusher();
+            sleep(5000);
             cmds.RetractPusher();
+            sleep(5000);
 
         //***********************************
         //Test drive for 70 inches

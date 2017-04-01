@@ -31,7 +31,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
     private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
     private Commands cmds = new Commands(robot, this);
 
-    private int TimeDebugSleep = 1500;
+    private int TimeDebugSleep = 0;
 
     public void runOpMode() throws InterruptedException
     {
@@ -73,10 +73,11 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         }
 
         //Drive to the wall, slowing for the last 6 inches
-        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
-        //sleep(TimeDebugSleep);
+        //cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
+        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction, configs.DIST_SHORT_TO_WALL*Direction, 5.0);
+        sleep(TimeDebugSleep);
 
-        cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
+        //cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
         //sleep(TimeDebugSleep);
 
         //Turn to face beacon
@@ -89,7 +90,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         {
             cmds.EncoderTurn("L",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
-        //sleep(TimeDebugSleep);
+        sleep(TimeDebugSleep);
 
         //Drive to first beacon
         cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1*Direction, configs.DIST_RAMP_TO_BEACON_1*Direction, 5.0);
@@ -99,11 +100,12 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         sleep(TimeDebugSleep);
 
         //Drive to second beacon, slowing for the last 6 inches
-        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), 5.0);
+        //cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), configs.DIST_BEACON1_TO_BEACON_2*Direction - (6*Direction), 5.0);
+        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_BEACON1_TO_BEACON_2*Direction, configs.DIST_BEACON1_TO_BEACON_2*Direction, 5.0);
         sleep(TimeDebugSleep);
 
-        cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
-        sleep(TimeDebugSleep);
+        //cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
+        //sleep(TimeDebugSleep);
 
         cmds.SenseBeacon();
         sleep(TimeDebugSleep);
@@ -113,15 +115,16 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         //sleep(TimeDebugSleep);
 
         //Turn to face center
-        cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
-        //sleep(TimeDebugSleep);
-
         //For RED, turn another 90 degrees
-        if(configs.ALLIANCE.equals("RED"))
+        if(configs.ALLIANCE.equals("BLUE"))
         {
-            cmds.EncoderTurn("R",configs.INCHES_NINETY_DEGREE_TURN,5.0);
-            //sleep(TimeDebugSleep);
+            cmds.EncoderTurn("R", configs.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
         }
+        else
+        {
+            cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN + configs.INCHES_NINETY_DEGREE_TURN,5.0);
+        }
+        //sleep(TimeDebugSleep);
 
         //Move close enough to shoot balls
         cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
