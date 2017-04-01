@@ -21,8 +21,7 @@ public class W_Auto_Shoot_Only extends LinearOpMode
 {
     //Establish sub-classes with Constructor call
     private Configuration configs = new Configuration(telemetry);
-    private Hardware robot = new Hardware(telemetry);   //, hardwareMap);
-    //private Initialize init = new Initialize(telemetry);
+    private Hardware robot = new Hardware(telemetry);
     private Commands cmds = new Commands(robot, this);
 
     private int TimeDebugSleep = 0;
@@ -34,18 +33,16 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.update();
 
         configs.loadParameters();
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
         robot.init(hardwareMap);
-        sleep(TimeDebugSleep);
+        //sleep(TimeDebugSleep);
 
-        robot.SetDefaults(hardwareMap, configs);    //hardwareMap);
-        sleep(TimeDebugSleep);
-
-        //init.InitializeHW(robot);
+        robot.SetDefaults(hardwareMap); //, configs);
+        //sleep(TimeDebugSleep);
 
         telemetry.addData("Config", configs.START_POSITION + " Starting Position");
-        telemetry.addData("Config", configs.AUTO_DELAY /1000 + " Sec. Delay");
+        telemetry.addData("Config", configs.AUTO_DELAY  + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
