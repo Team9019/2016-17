@@ -19,9 +19,6 @@ public class W_Menu_OpMode extends OpMode
     public void init()
     {
         //read values from file
-
-        //Is the context needed?  "this" represents the OpMode
-        //menu.ReadFile(hardwareMap.appContext,this);
         menu.ReadFile();//this);
 
         runtime.reset();
@@ -31,7 +28,7 @@ public class W_Menu_OpMode extends OpMode
         {
             telemetry.addData("Read from File:", menu.param.colorAlliance + " Alliance");
             telemetry.addData("Read from File:", menu.param.autonType + " Starting Position");
-            telemetry.addData("Read from File:", Integer.toString(menu.param.delayInSec / 1000 ) + " Sec. Delay");
+            telemetry.addData("Read from File:", Integer.toString(menu.param.delayInSec) + " Sec. Delay");
             telemetry.update();
         }
     }
@@ -40,8 +37,7 @@ public class W_Menu_OpMode extends OpMode
     public void init_loop()
     {
         //Collect new settings from driver
-        //menu.CollectNew(hardwareMap.appContext,this);
-        menu.CollectNew(); //this);
+        menu.CollectNew();
     }
 
     @Override
@@ -50,7 +46,7 @@ public class W_Menu_OpMode extends OpMode
         //Show menu settings to driver
         telemetry.addData("Set on Menu:", menu.param.colorAlliance + " Alliance");
         telemetry.addData("Set on Menu:", menu.param.autonType + " Starting Position");
-        telemetry.addData("Set on Menu:", Integer.toString(menu.param.delayInSec / 1000) + " Sec. Delay");
+        telemetry.addData("Set on Menu:", Integer.toString(menu.param.delayInSec) + " Sec. Delay");
         telemetry.addData("DONE", "Press STOP to close.");
         telemetry.update();
     }
