@@ -20,6 +20,7 @@ public class Menu_Commands
         ALLIANCE,
         AUTON_TYPE,
         DELAY,
+        TEST_TYPE,
         READY;
         private static ConfigStep[] vals = values();
         public ConfigStep next() { return vals[(this.ordinal()+1) % vals.length];}
@@ -31,13 +32,24 @@ public class Menu_Commands
         AllianceList colorAlliance;
         AutonType autonType;
         int delayInSec;
+        TestList testList;
+    }
+
+    public enum TestList
+    {
+        DRIVE70INCHES,
+        DRIVE10SEC,
+        PUSHER,
+        SENSE;
+        private static TestList[] vals = values();
+        public TestList next() { return vals[(this.ordinal()+1) % vals.length];}
+        public TestList prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
     }
 
     public enum AllianceList
     {
         RED,
         BLUE;
-        //NOT_SET;
         private static AllianceList[] vals = values();
         public AllianceList next() { return vals[(this.ordinal()+1) % vals.length];}
         public AllianceList prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
@@ -47,7 +59,6 @@ public class Menu_Commands
     {
         SHORT,
         LONG;
-        //NOT_SET;
         private static AutonType[] vals = values();
         public AutonType next() { return vals[(this.ordinal()+1) % vals.length];}
         public AutonType prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
@@ -105,7 +116,15 @@ public class Menu_Commands
                     }
                 }
 
-                param.delayInSec = Integer.parseInt(properties.getProperty("AUTO_DELAY")) * 1000 ;
+                param.delayInSec = Integer.parseInt(properties.getProperty("AUTO_DELAY")) ;
+
+                for (TestList a : TestList.values())
+                {
+                    if (a.name().equals(properties.getProperty("TEST_TYPE")))
+                    {
+                        param.testList = a;
+                    }
+                }
 
                 in.close();
             }
@@ -120,6 +139,7 @@ public class Menu_Commands
             param.colorAlliance = AllianceList.RED;
             param.autonType= AutonType.SHORT;
             param.delayInSec=0;
+            param.testList = TestList.PUSHER;
             //***************************************
         }
 
@@ -234,6 +254,26 @@ public class Menu_Commands
             }
         }
 
+        currConfigStepCheck = ConfigStep.TEST_TYPE;
+        // message to driver about state of this config parameter
+        if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
+        {
+            opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Test Type: " + param.testList.name());
+        }
+
+        if (configStepState == currConfigStepCheck)
+        {
+            opMode.telemetry.addData("C" + configStepState.ordinal() + "A", "Push Y for +, A for -");
+            if (y1 && !lastY1)
+            {
+                param.testList = param.testList.next();
+            }
+            if (a1 && !lastA1)
+            {
+                param.testList = param.testList.prev();
+            }
+        }
+
         currConfigStepCheck = ConfigStep.READY;
         // message to driver about state of this config parameter
         if (configStepState.ordinal() >= currConfigStepCheck.ordinal() )
@@ -260,7 +300,10 @@ public class Menu_Commands
                 contentInBytes = ("START_POSITION = " + param.autonType.name() + "\r\n").getBytes();
                 out.write(contentInBytes);
 
-                contentInBytes = ("AUTO_DELAY = " + Integer.toString(param.delayInSec / 1000) + "\r\n").getBytes();
+                contentInBytes = ("AUTO_DELAY = " + Integer.toString(param.delayInSec) + "\r\n").getBytes();
+                out.write(contentInBytes);
+
+                contentInBytes = ("TEST_TYPE = " + param.testList.name() + "\r\n").getBytes();
                 out.write(contentInBytes);
 
 //                out.flush();

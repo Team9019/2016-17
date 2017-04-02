@@ -29,6 +29,7 @@ public class W_Menu_OpMode extends OpMode
             telemetry.addData("Read from File:", menu.param.colorAlliance + " Alliance");
             telemetry.addData("Read from File:", menu.param.autonType + " Starting Position");
             telemetry.addData("Read from File:", Integer.toString(menu.param.delayInSec) + " Sec. Delay");
+            telemetry.addData("Read from File:", menu.param.testList + " Test");
             telemetry.update();
         }
     }
@@ -47,6 +48,7 @@ public class W_Menu_OpMode extends OpMode
         telemetry.addData("Set on Menu:", menu.param.colorAlliance + " Alliance");
         telemetry.addData("Set on Menu:", menu.param.autonType + " Starting Position");
         telemetry.addData("Set on Menu:", Integer.toString(menu.param.delayInSec) + " Sec. Delay");
+        telemetry.addData("Set on Menu:", menu.param.testList + " Test");
         telemetry.addData("DONE", "Press STOP to close.");
         telemetry.update();
     }
