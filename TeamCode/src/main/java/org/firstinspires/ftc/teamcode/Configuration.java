@@ -53,6 +53,7 @@ public class Configuration
         public static String ALLIANCE;
         public static String START_POSITION;
         public static int AUTO_DELAY;
+        public static String TEST_TYPE;
 
     //Motor Power
         public static double POWER_DRIVE;
@@ -135,6 +136,7 @@ public class Configuration
             ALLIANCE = propertiesmenu.getProperty("ALLIANCE");
             START_POSITION = propertiesmenu.getProperty("START_POSITION");
             AUTO_DELAY = Integer.parseInt(propertiesmenu.getProperty("AUTO_DELAY")) ;
+            TEST_TYPE = propertiesmenu.getProperty("TEST_TYPE");
 
             //Read configuration file
             FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
