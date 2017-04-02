@@ -60,7 +60,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(configs.AUTO_DELAY);
+        sleep(configs.AUTO_DELAY*1000);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -75,6 +75,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         //Drive to the wall, slowing for the last 6 inches
         //cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
         cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction, configs.DIST_SHORT_TO_WALL*Direction, 5.0);
+        sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
         //cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
@@ -90,6 +91,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         {
             cmds.EncoderTurn("L",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
+        sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
         //Drive to first beacon
@@ -112,6 +114,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
 
         //Drive to corner position
         cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_BEACON2_TO_CORNER*Direction, configs.DIST_BEACON2_TO_CORNER*Direction, 5.0);
+        sleep(250); //pause for momentum
         //sleep(TimeDebugSleep);
 
         //Turn to face center
@@ -124,11 +127,12 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         {
             cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN + configs.INCHES_NINETY_DEGREE_TURN,5.0);
         }
-        //sleep(TimeDebugSleep);
+        sleep(250); //pause for momentum
+        sleep(TimeDebugSleep);
 
         //Move close enough to shoot balls
         cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
-        //sleep(TimeDebugSleep);
+        sleep(TimeDebugSleep);
 
         robot.motorLaunch.setPower(configs.POWER_LAUNCH);
 
