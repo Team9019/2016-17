@@ -27,13 +27,20 @@ public class Commands
         this.opMode = opMode;
     }
 
-    public void ExtendPusher()
-    {
+    public void ExtendPusher() {
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Starting...");
         opMode.telemetry.update();
 
-        robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
-        opMode.sleep(1500);
+        try
+        {
+            robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
+            //opMode.sleep(2000);
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
 
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Complete!");
         opMode.telemetry.update();
@@ -44,8 +51,16 @@ public class Commands
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Starting...");
         opMode.telemetry.update();
 
-        robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-        opMode.sleep(1500);
+        try
+        {
+            robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
+            //opMode.sleep(2000);
+            Thread.sleep(2000);
+        }
+        catch (InterruptedException e)
+        {
+            e.printStackTrace();
+        }
 
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Complete!");
         opMode.telemetry.update();
@@ -62,7 +77,9 @@ public class Commands
 
         //Initial button push
         ExtendPusher();
+        //opMode.sleep(3000);
         RetractPusher();
+        //opMode.sleep(3000);
 
         runtime.reset();
         while ( opMode.opModeIsActive() &&
@@ -125,6 +142,8 @@ public class Commands
         int newRightFrontTarget;
         int newLeftBackTarget;
         int newRightBackTarget;
+        int error;
+        double slavespeed = speed;
 
         opMode.telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Starting...");
         opMode.telemetry.update();
@@ -191,18 +210,25 @@ public class Commands
                     )
             {
                 // Display positions for the driver.
-                opMode.telemetry.addData("EncoderDrive", "> Currently at %7d :%7d",
+                //opMode.telemetry.addData("EncoderDrive", "> Currently at %7d :%7d",
                         //robot.motorFrontLeft.getCurrentPosition(), robot.motorFrontRight.getCurrentPosition(),
-                        robot.motorBackLeft.getCurrentPosition(),
-                        robot.motorBackRight.getCurrentPosition());
-                opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d",
+                //        robot.motorBackLeft.getCurrentPosition(),
+                //        robot.motorBackRight.getCurrentPosition());
+                //opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d",
                         //newLeftFrontTarget, newRightFrontTarget,
-                        newLeftBackTarget, newRightBackTarget);
+                //        newLeftBackTarget, newRightBackTarget);
+                error = robot.motorBackRight.getCurrentPosition() - robot.motorBackLeft.getCurrentPosition();
+                slavespeed = slavespeed + error * 0.2;
+
+                opMode.telemetry.addData("EncoderDrive","Diff: %7d apply slave speed = :%7d ?", error, slavespeed);
+                opMode.telemetry.addData("EncoderDrive","Slave Speed:  %7d", slavespeed);
                 opMode.telemetry.update();
 
-                //sleep(1000);
+                //robot.motorBackLeft.setPower();
+
                 opMode.idle();
             }
+            opMode.sleep(3000);
 
             // Stop all motion;
             StopDriving(); //robot);
@@ -226,7 +252,7 @@ public class Commands
             //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //idle();   // optional pause after each move
+            opMode.idle();
         }
         opMode.telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Complete!");
         opMode.telemetry.update();
