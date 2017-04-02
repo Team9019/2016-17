@@ -152,7 +152,7 @@ public class Configuration
             POS_IN_PUSHER_SERVO = Double.parseDouble(properties.getProperty("POS_IN_PUSHER_SERVO"));
             POS_OUT_PUSHER_SERVO = Double.parseDouble(properties.getProperty("POS_OUT_PUSHER_SERVO"));
 
-            TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH")) * 1000;
+            TIME_LAUNCH = Integer.parseInt(properties.getProperty("TIME_LAUNCH"));
 
             DIST_CORNER_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_CORNER_TO_SHOOT"));
             DIST_SIDE_TO_SHOOT = Integer.parseInt(properties.getProperty("DIST_SIDE_TO_SHOOT"));
