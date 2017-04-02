@@ -52,7 +52,7 @@ public class W_Auto_Center_Park extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(configs.AUTO_DELAY);
+        sleep(configs.AUTO_DELAY*1000);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
