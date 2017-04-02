@@ -146,8 +146,8 @@ public class Hardware
 
         //motorFrontLeft.setMaxSpeed(3000);
         //motorFrontRight.setMaxSpeed(3000);
-        //motorBackLeft.setMaxSpeed(3000);
-        //motorBackRight.setMaxSpeed(3000);
+        motorBackLeft.setMaxSpeed(3000);
+        motorBackRight.setMaxSpeed(3000);
 
         //telemetry.addData
         //        ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
