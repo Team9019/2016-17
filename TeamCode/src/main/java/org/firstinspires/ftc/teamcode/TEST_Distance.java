@@ -53,8 +53,8 @@ public class TEST_Distance extends LinearOpMode
                 //Encoders will be reset and set to RUN_USING_ENCODER above
                 runtime.reset();
 
-                robot.motorBackLeft.setPower(1.0);
-                robot.motorBackRight.setPower(1.0);
+                robot.motorBackLeft.setPower(configs.POWER_DRIVE);
+                robot.motorBackRight.setPower(configs.POWER_DRIVE);
 
                 while ( opModeIsActive() && runtime.seconds() < 10)
                 {
