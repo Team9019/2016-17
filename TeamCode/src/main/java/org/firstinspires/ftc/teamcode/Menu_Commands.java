@@ -35,17 +35,6 @@ public class Menu_Commands
         TestList testList;
     }
 
-    public enum TestList
-    {
-        DRIVE70INCHES,
-        DRIVE10SEC,
-        PUSHER,
-        SENSE;
-        private static TestList[] vals = values();
-        public TestList next() { return vals[(this.ordinal()+1) % vals.length];}
-        public TestList prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
-    }
-
     public enum AllianceList
     {
         RED,
@@ -64,6 +53,17 @@ public class Menu_Commands
         public AutonType prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
     }
 
+    public enum TestList
+    {
+        DRIVE70INCHES,
+        DRIVE10SEC,
+        PUSHER,
+        SENSE;
+        private static TestList[] vals = values();
+        public TestList next() { return vals[(this.ordinal()+1) % vals.length];}
+        public TestList prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
+    }
+
     // the parameters that need to be setup during configuration
     boolean gamepad1IsOK, gamepad2IsOK;
 
@@ -77,6 +77,8 @@ public class Menu_Commands
     private Properties properties = new Properties();
     private String configFileName="/storage/emulated/0/FIRST/configpropertiesmenu.txt";
 
+    String testDescript;
+
     /* Constructor */
     public Menu_Commands(OpMode opMode)
     {
@@ -85,8 +87,7 @@ public class Menu_Commands
     }
 
     //Read in properties file
-    //public void ReadFile(Context context, OpMode opMode)
-    public void ReadFile() //OpMode opMode)
+    public void ReadFile()
     {
         // setup initial configuration parameters here
         gamepad1IsOK=false;
@@ -158,34 +159,32 @@ public class Menu_Commands
         y1 = opMode.gamepad1.y;
         start1 = opMode.gamepad1.start;
 
-        //opMode.telemetry.clearData();
-        //opMode.telemetry.clearAll();
-
         currConfigStepCheck = ConfigStep.TEST_GAMEPAD1;
-        // message to driver about state of this config parameter
-        if (configStepState.ordinal() >= currConfigStepCheck.ordinal()) {
-            if (!gamepad1IsOK) {
+        if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
+        {
+            if (!gamepad1IsOK)
+            {
                 opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "GAMEPAD1 NOT VERIFIED!!!");
             }
         }
-        // configure this parameter
         if (configStepState == currConfigStepCheck) {
             if (!gamepad1IsOK) {
                 opMode.telemetry.addData("C" + currConfigStepCheck.ordinal() + "A", "Push A on Gamepad 1");
             }
-            if (a1) {
+            if (a1)
+            {
                 gamepad1IsOK = true;
             }
         }
 
         currConfigStepCheck = ConfigStep.TEST_GAMEPAD2;
-        // message to driver about state of this config parameter
-        if (configStepState.ordinal() >= currConfigStepCheck.ordinal()) {
-            if (!gamepad2IsOK) {
+        if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
+        {
+            if (!gamepad2IsOK)
+            {
                 opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "GAMEPAD2 NOT VERIFIED!!!");
             }
         }
-        // configure this parameter
         if (configStepState == currConfigStepCheck) {
             if (!gamepad2IsOK) {
                 opMode.telemetry.addData("C" + currConfigStepCheck.ordinal() + "A", "Push B on Gamepad 2");
@@ -196,12 +195,10 @@ public class Menu_Commands
         }
 
         currConfigStepCheck = ConfigStep.ALLIANCE;
-        // message to driver about state of this config parameter
         if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
         {
             opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Alliance: " + param.colorAlliance.name());
         }
-
         if (configStepState == currConfigStepCheck)
         {
             opMode.telemetry.addData("C" + configStepState.ordinal() + "A", "Push Y for +, A for -");
@@ -214,16 +211,14 @@ public class Menu_Commands
                 param.colorAlliance = param.colorAlliance.prev();
             }
         }
- //param.colorAlliance = param.colorAlliance.BLUE;
 
         currConfigStepCheck = ConfigStep.AUTON_TYPE;
-        // message to driver about state of this config parameter
         if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
         {
             opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Auton: " + param.autonType.name());
         }
-        // configure this parameter
-        if (configStepState == currConfigStepCheck) {
+        if (configStepState == currConfigStepCheck)
+        {
             opMode.telemetry.addData("C" + configStepState.ordinal() + "A", "Push Y for +, A for -");
             if (y1 && !lastY1)
             {
@@ -236,31 +231,51 @@ public class Menu_Commands
         }
 
         currConfigStepCheck = ConfigStep.DELAY;
-        // message to driver about state of this config parameter
-        if (configStepState.ordinal() >= currConfigStepCheck.ordinal()) {
+        if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
+        {
             opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Delay: " + param.delayInSec + " sec");
         }
-        // configure this parameter
-        if (configStepState == currConfigStepCheck) {
+        if (configStepState == currConfigStepCheck)
+        {
             opMode.telemetry.addData("C" + configStepState.ordinal() + "A", "Push Y for +, A for -");
-            if (y1 && !lastY1) {
+            if (y1 && !lastY1)
+            {
                 param.delayInSec++;
             }
-            if (a1 && !lastA1) {
+            if (a1 && !lastA1)
+            {
                 param.delayInSec--;
-                if (param.delayInSec < 0) {
+                if (param.delayInSec < 0)
+                {
                     param.delayInSec = 0;
                 }
             }
         }
 
         currConfigStepCheck = ConfigStep.TEST_TYPE;
-        // message to driver about state of this config parameter
         if (configStepState.ordinal() >= currConfigStepCheck.ordinal())
         {
-            opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Test Type: " + param.testList.name());
-        }
+            switch (param.testList.name())
+            {
+                case "DRIVE70INCHES":
+                    testDescript = "Drive 70 inches ";
+                    break;
+                case "DRIVE10SEC":
+                    testDescript = "Drive 10 sec ";
+                    break;
+                case "PUSHER":
+                    testDescript = "Push & Retract ";
+                    break;
+                case "SENSE":
+                    testDescript = "Push & Sense ";
+                    break;
+                default:
+                    testDescript = "";
+                    break;
+            }
 
+            opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "Test Type: " + testDescript + "(" + param.testList.name() +")");
+        }
         if (configStepState == currConfigStepCheck)
         {
             opMode.telemetry.addData("C" + configStepState.ordinal() + "A", "Push Y for +, A for -");
@@ -275,7 +290,6 @@ public class Menu_Commands
         }
 
         currConfigStepCheck = ConfigStep.READY;
-        // message to driver about state of this config parameter
         if (configStepState.ordinal() >= currConfigStepCheck.ordinal() )
         {
             opMode.telemetry.addData("C" + currConfigStepCheck.ordinal(), "READY TO GO!");
