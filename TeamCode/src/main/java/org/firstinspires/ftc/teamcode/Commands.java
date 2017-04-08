@@ -38,7 +38,7 @@ public class Commands
 
             //{
             robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
-            //opMode.sleep(2000);
+            opMode.sleep(2000);
             //Thread.sleep(2000);
             //}
             //catch (InterruptedException e)
@@ -60,7 +60,7 @@ public class Commands
             //try
             //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-            //opMode.sleep(2000);
+            opMode.sleep(2000);
             //Thread.sleep(2000);
             //}
             //catch (InterruptedException e)
@@ -83,9 +83,9 @@ public class Commands
 
         //Initial button push
         ExtendPusher();
-        opMode.sleep(1500);
+        //opMode.sleep(1500);
         RetractPusher();
-        opMode.sleep(1500);
+        //opMode.sleep(1500);
 
         runtime.reset();
         while ( opMode.opModeIsActive() &&
@@ -124,12 +124,12 @@ public class Commands
                     )
             {
                 //wait 6 seconds before determining whether to drive forward again (wrong color)
-                opMode.sleep(4000);
+                opMode.sleep(1500);
 
                 ExtendPusher();
-                opMode.sleep(1500);
+                //opMode.sleep(1500);
                 RetractPusher();
-                opMode.sleep(1500);
+                //opMode.sleep(1500);
             }
             else
             {
@@ -171,7 +171,7 @@ public class Commands
                 robot.motorBackLeft.getCurrentPosition(),
                 robot.motorBackRight.getCurrentPosition());
         opMode.telemetry.update();
-        //sleep(1500);
+        //opMode.sleep(1500);
 
         // Calculate new target position
         //newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
@@ -184,7 +184,7 @@ public class Commands
                    //newLeftFrontTarget,newRightFrontTarget,
                 newLeftBackTarget, newRightBackTarget);
         opMode.telemetry.update();
-        //sleep(1500);
+        //opMode.sleep(1500);
 
         // Ensure that the opmode is still active
         if (opMode.opModeIsActive())
@@ -204,8 +204,8 @@ public class Commands
             //speed = Math.abs(speed);
             //robot.motorFrontLeft.setPower(speed);
             //robot.motorFrontRight.setPower(speed);
-            robot.motorBackLeft.setPower(speed);
             robot.motorBackRight.setPower(speed);
+            robot.motorBackLeft.setPower(speed);
 
             // reset the timeout time and start motion.
             runtime.reset();
@@ -248,7 +248,7 @@ public class Commands
                     robot.motorBackLeft.getCurrentPosition(),
                     robot.motorBackRight.getCurrentPosition());
             opMode.telemetry.update();
-            ///sleep(3000);
+            //opMode.sleep(3000);
 
             //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

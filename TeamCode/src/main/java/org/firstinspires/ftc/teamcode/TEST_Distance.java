@@ -68,6 +68,7 @@ public class TEST_Distance extends LinearOpMode
 
                 telemetry.addData("EncoderDrive", "> Left = %7d Right = :%7d", robot.motorBackLeft.getCurrentPosition(), robot.motorBackRight.getCurrentPosition());
                 telemetry.update();
+                sleep(3000);
                 break;
             case "PUSHER":
                 //Test push servo

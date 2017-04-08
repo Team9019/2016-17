@@ -91,7 +91,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         {
             cmds.EncoderTurn("L",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
-        //sleep(250); //pause for momentum
+        sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
         //Drive to first beacon
