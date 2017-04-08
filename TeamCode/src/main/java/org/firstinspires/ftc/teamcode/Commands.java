@@ -240,7 +240,7 @@ public class Commands
             //opMode.sleep(3000);
 
             // Stop all motion;
-            StopDriving(); //robot);
+            //StopDriving(); //robot);
 
             // Display current position
             opMode.telemetry.addData("EncoderDrive", "> Final position of %7d :%7d",
@@ -292,6 +292,8 @@ public class Commands
         if (opMode.opModeIsActive())
         {
             robot.motorLaunch.setPower(Configuration.POWER_LAUNCH);
+            opMode.sleep(2000);
+            robot.motorCollect.setPower(1.0);
 
             runtime.reset();
             while (opMode.opModeIsActive() &&
@@ -304,6 +306,7 @@ public class Commands
             }
 
             robot.motorLaunch.setPower(0);
+            robot.motorCollect.setPower(0);
         }
 
         opMode.telemetry.addData("LaunchNewBall", "Ball Launch Complete!");

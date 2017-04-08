@@ -60,7 +60,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(configs.AUTO_DELAY*1000);
+        sleep(configs.AUTO_DELAY * 1000);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -98,6 +98,8 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1*Direction, configs.DIST_RAMP_TO_BEACON_1*Direction, 5.0);
         sleep(TimeDebugSleep);
 
+        cmds.StopDriving();
+
         cmds.SenseBeacon();
         sleep(TimeDebugSleep);
 
@@ -108,6 +110,8 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
 
         //cmds.EncoderDrive(configs.POWER_APPROACH, 6*Direction, 6*Direction, 5.0);
         //sleep(TimeDebugSleep);
+
+        cmds.StopDriving();
 
         cmds.SenseBeacon();
         sleep(TimeDebugSleep);
@@ -134,16 +138,18 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
         sleep(TimeDebugSleep);
 
-        robot.motorLaunch.setPower(configs.POWER_LAUNCH);
+        cmds.StopDriving();
+
+        //robot.motorLaunch.setPower(configs.POWER_LAUNCH);
 
         //Use delay until ball launch is ready for use
-        sleep(2000);
+        //sleep(2000);
 
-        robot.motorCollect.setPower(1.0);
+        //robot.motorCollect.setPower(1.0);
 
         cmds.Shoot();
 
-        robot.motorCollect.setPower(0);
+        //robot.motorCollect.setPower(0);
         //sleep(TimeDebugSleep);
 
         //Drive to center

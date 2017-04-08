@@ -16,7 +16,7 @@ public class TEST_Distance extends LinearOpMode
 
     private ElapsedTime runtime = new ElapsedTime();
 
-    private int TimeDebugSleep = 3000;
+    private int TimeDebugSleep = 0;
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -80,12 +80,19 @@ public class TEST_Distance extends LinearOpMode
                 //Test sense beacon
                 cmds.SenseBeacon();
                 break;
+            case "SHOOT":
+                robot.motorLaunch.setPower(configs.POWER_LAUNCH);
+                sleep(2000);
+                robot.motorCollect.setPower(1.0);
+                cmds.Shoot();   //robot);
+                robot.motorCollect.setPower(0);
+                break;
         }
 
         //***********************************
-        sleep(TimeDebugSleep);
-
         cmds.StopDriving();
+
+        //sleep(TimeDebugSleep);
 
         telemetry.addData("Status","Testing Complete!");
         telemetry.update();

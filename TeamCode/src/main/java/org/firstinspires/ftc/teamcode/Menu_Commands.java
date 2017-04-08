@@ -58,7 +58,8 @@ public class Menu_Commands
         DRIVE70INCHES,
         DRIVE10SEC,
         PUSHER,
-        SENSE;
+        SENSE,
+        SHOOT;
         private static TestList[] vals = values();
         public TestList next() { return vals[(this.ordinal()+1) % vals.length];}
         public TestList prev() { return vals[(this.ordinal()-1+vals.length) % vals.length];}
@@ -269,6 +270,8 @@ public class Menu_Commands
                 case "SENSE":
                     testDescript = "Push & Sense ";
                     break;
+                case "SHOOT":
+                    testDescript = "Shoot Only ";
                 default:
                     testDescript = "";
                     break;

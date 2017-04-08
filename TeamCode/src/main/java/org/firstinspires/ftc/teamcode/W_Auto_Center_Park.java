@@ -52,7 +52,7 @@ public class W_Auto_Center_Park extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(configs.AUTO_DELAY*1000);
+        sleep(configs.AUTO_DELAY * 1000);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -67,19 +67,20 @@ public class W_Auto_Center_Park extends LinearOpMode
         {
             cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
         }
+        cmds.StopDriving();
         sleep(TimeDebugSleep);
 
-        robot.motorLaunch.setPower(configs.POWER_LAUNCH);
+        //robot.motorLaunch.setPower(configs.POWER_LAUNCH);
 
         //Use delay until ball launch is ready for use
-        sleep(2000);
+        //sleep(2000);
 
-        robot.motorCollect.setPower(1.0);
+        //robot.motorCollect.setPower(1.0);
 
         cmds.Shoot();
 
-        robot.motorCollect.setPower(0);
-        sleep(TimeDebugSleep);
+        //robot.motorCollect.setPower(0);
+        //sleep(TimeDebugSleep);
 
         //Drive to center
         if (configs.START_POSITION.equals("LONG"))
@@ -90,9 +91,8 @@ public class W_Auto_Center_Park extends LinearOpMode
         {
             cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_PARK, configs.DIST_SIDE_TO_PARK, 5.0);
         }
-        sleep(TimeDebugSleep);
-
         cmds.StopDriving();
+//        sleep(TimeDebugSleep);
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();
