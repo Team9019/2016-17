@@ -72,9 +72,9 @@ public class TEST_Distance extends LinearOpMode
             case "PUSHER":
                 //Test push servo
                 cmds.ExtendPusher();
-                //sleep(5000);
+                sleep(1500);
                 cmds.RetractPusher();
-                //sleep(5000);
+                sleep(1500);
                 break;
             case "SENSE":
                 //Test sense beacon
