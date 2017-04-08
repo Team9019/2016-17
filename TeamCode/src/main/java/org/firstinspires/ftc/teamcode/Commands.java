@@ -27,21 +27,25 @@ public class Commands
         this.opMode = opMode;
     }
 
-    public void ExtendPusher() {
+    public void ExtendPusher()
+    {
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Starting...");
         opMode.telemetry.update();
 
-        try
+        if (opMode.opModeIsActive())
         {
+            //try
+
+            //{
             robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
             //opMode.sleep(2000);
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
+            //}
+            //catch (InterruptedException e)
+            //{
+            //    e.printStackTrace();
+            //}
         }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-
         opMode.telemetry.addData("ExtendPusher", "Extend Pusher Complete!");
         opMode.telemetry.update();
     }
@@ -51,17 +55,19 @@ public class Commands
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Starting...");
         opMode.telemetry.update();
 
-        try
+        if (opMode.opModeIsActive())
         {
+            //try
+            //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
             //opMode.sleep(2000);
-            Thread.sleep(2000);
+            //Thread.sleep(2000);
+            //}
+            //catch (InterruptedException e)
+            //{
+            //    e.printStackTrace();
+            //}
         }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-
         opMode.telemetry.addData("RetractPusher", "Retract Pusher Complete!");
         opMode.telemetry.update();
     }
@@ -77,20 +83,20 @@ public class Commands
 
         //Initial button push
         ExtendPusher();
-        //opMode.sleep(3000);
+        opMode.sleep(1500);
         RetractPusher();
-        //opMode.sleep(3000);
+        opMode.sleep(1500);
 
         runtime.reset();
         while ( opMode.opModeIsActive() &&
                 robot.sensorColor.alpha() < 20 &&
                 Searching &&
-                runtime.seconds() < 13
+                runtime.seconds() < 7
                 )
         {
-            opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-            opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            opMode.telemetry.update();
+            //opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            //opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            //opMode.telemetry.update();
 
             //Test for RED
             if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
@@ -100,15 +106,16 @@ public class Commands
                 opMode.telemetry.update();
                 robot.devIM.setLED(1,true);     //Red
             }
-
-            //Test for BLUE
-            if (robot.sensorColor.blue()>=Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue()<=Configuration.COLOR_BLUE_HIGH)
-            {
-                BlueFound = true;
-                opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
-                opMode.telemetry.update();
-                robot.devIM.setLED(0, true);    //Blue
-            }
+            //else
+            //{
+                //Test for BLUE
+                if (robot.sensorColor.blue() >= Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue() <= Configuration.COLOR_BLUE_HIGH) {
+                    BlueFound = true;
+                    opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
+                    opMode.telemetry.update();
+                    robot.devIM.setLED(0, true);    //Blue
+                }
+            //}
 
             //If beacon is the wrong color wait then push the button.
             //If beacon is the correct color, turn off searching to allow moving on
@@ -117,10 +124,12 @@ public class Commands
                     )
             {
                 //wait 6 seconds before determining whether to drive forward again (wrong color)
-                opMode.sleep(6000);
+                opMode.sleep(4000);
 
                 ExtendPusher();
+                opMode.sleep(1500);
                 RetractPusher();
+                opMode.sleep(1500);
             }
             else
             {
@@ -142,8 +151,8 @@ public class Commands
         int newRightFrontTarget;
         int newLeftBackTarget;
         int newRightBackTarget;
-        int error;
-        double slavespeed = speed;
+        //int error;
+        //double slavespeed = speed;
 
         opMode.telemetry.addData("EncoderDrive", "Drive:  L(" + leftInches +") R(" + rightInches + ") Starting...");
         opMode.telemetry.update();
@@ -192,7 +201,7 @@ public class Commands
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            speed = Math.abs(speed);
+            //speed = Math.abs(speed);
             //robot.motorFrontLeft.setPower(speed);
             //robot.motorFrontRight.setPower(speed);
             robot.motorBackLeft.setPower(speed);
@@ -217,18 +226,18 @@ public class Commands
                 //opMode.telemetry.addData("EncoderDrive", "> Destination of %7d :%7d",
                         //newLeftFrontTarget, newRightFrontTarget,
                 //        newLeftBackTarget, newRightBackTarget);
-                error = robot.motorBackRight.getCurrentPosition() - robot.motorBackLeft.getCurrentPosition();
-                slavespeed = slavespeed + error * 0.2;
+                //error = robot.motorBackRight.getCurrentPosition() - robot.motorBackLeft.getCurrentPosition();
+                //slavespeed = slavespeed + error * 0.2;
 
-                opMode.telemetry.addData("EncoderDrive","Diff: %7d apply slave speed = :%7d ?", error, slavespeed);
-                opMode.telemetry.addData("EncoderDrive","Slave Speed:  %7d", slavespeed);
-                opMode.telemetry.update();
+                //opMode.telemetry.addData("EncoderDrive","Diff: %7d apply slave speed = :%7d ?", error, slavespeed);
+                //opMode.telemetry.addData("EncoderDrive","Slave Speed:  %7d", slavespeed);
+                //opMode.telemetry.update();
 
                 //robot.motorBackLeft.setPower();
 
                 opMode.idle();
             }
-            opMode.sleep(3000);
+            //opMode.sleep(3000);
 
             // Stop all motion;
             StopDriving(); //robot);
