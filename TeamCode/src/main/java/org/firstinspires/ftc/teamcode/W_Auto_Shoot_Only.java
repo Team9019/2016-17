@@ -52,7 +52,7 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         telemetry.addData("Status", "Delay before driving ...");
         telemetry.update();
 
-        sleep(configs.AUTO_DELAY*1000);
+        sleep(configs.AUTO_DELAY * 1000);
 
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
@@ -69,19 +69,21 @@ public class W_Auto_Shoot_Only extends LinearOpMode
             cmds.EncoderDrive(//robot,
                     configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
         }
-        sleep(TimeDebugSleep);
+        cmds.StopDriving();
 
-        robot.motorLaunch.setPower(configs.POWER_LAUNCH);
+        //sleep(TimeDebugSleep);
+
+        //robot.motorLaunch.setPower(configs.POWER_LAUNCH);
 
         //Use delay until ball launch is ready for use
-        sleep(2000);
+        //sleep(2000);
 
-        robot.motorCollect.setPower(1.0);
+        //robot.motorCollect.setPower(1.0);
 
         cmds.Shoot();   //robot);
 
-        robot.motorCollect.setPower(0);
-        sleep(TimeDebugSleep);
+        //robot.motorCollect.setPower(0);
+        //sleep(TimeDebugSleep);
 
         telemetry.addData("Status","Autonomous Complete!");
         telemetry.update();
