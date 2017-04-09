@@ -15,7 +15,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="1 Shoot Only (Req. POS/DELAY)", group="Autonomous")
+@Autonomous(name="Shoot Only (Long Pos) #Delay", group="Autonomous")
 //@Disabled
 public class W_Auto_Shoot_Only extends LinearOpMode
 {
@@ -41,7 +41,7 @@ public class W_Auto_Shoot_Only extends LinearOpMode
         robot.SetDefaults(hardwareMap); //, configs);
         //sleep(TimeDebugSleep);
 
-        telemetry.addData("Config", configs.START_POSITION + " Starting Position");
+        //telemetry.addData("Config", configs.START_POSITION + " Starting Position");
         telemetry.addData("Config", configs.AUTO_DELAY  + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();

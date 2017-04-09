@@ -15,7 +15,7 @@ FUNCTION:
         Stop
 */
 
-@Autonomous(name="2 Center Park (Req. POS/DELAY)", group="Autonomous")
+@Autonomous(name="Center Park (Long Pos) #Delay", group="Autonomous")
 //@Disabled
 public class W_Auto_Center_Park extends LinearOpMode
 {
@@ -41,7 +41,7 @@ public class W_Auto_Center_Park extends LinearOpMode
         robot.SetDefaults(hardwareMap); //, configs);
         //sleep(TimeDebugSleep);
 
-        telemetry.addData("Config", configs.START_POSITION + " Starting Position");
+        //telemetry.addData("Config", configs.START_POSITION + " Starting Position");
         telemetry.addData("Config", configs.AUTO_DELAY + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
@@ -63,7 +63,7 @@ public class W_Auto_Center_Park extends LinearOpMode
         {
             cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_SHOOT, configs.DIST_CORNER_TO_SHOOT, 5.0);
         }
-        else //SHORT
+        else //SHORT - won't ever be used
         {
             cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_SHOOT, configs.DIST_SIDE_TO_SHOOT, 5.0);
         }
@@ -85,9 +85,9 @@ public class W_Auto_Center_Park extends LinearOpMode
         //Drive to center
         if (configs.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_PARK, configs.DIST_CORNER_TO_PARK, 5.0);
+            cmds.EncoderDrive(configs.POWER_DRIVE, 72 - configs.DIST_CORNER_TO_SHOOT, 72 - configs.DIST_CORNER_TO_SHOOT, 5.0);
         }
-        else
+        else    //SHORT - won't ever be used
         {
             cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SIDE_TO_PARK, configs.DIST_SIDE_TO_PARK, 5.0);
         }

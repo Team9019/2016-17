@@ -22,7 +22,7 @@ FUNCTION:
         Stop
  */
 
-@Autonomous(name="3 *NEW* Beacon SHORT (Req. ALLIANCE/DELAY)", group="Autonomous")
+@Autonomous(name="Beacon (Short Pos) #Alliance", group="Autonomous")
 //@Disabled
 public class W_Auto_Beacon_SHORT extends LinearOpMode
 {
@@ -50,20 +50,20 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         //sleep(TimeDebugSleep);
 
         telemetry.addData("Config", configs.ALLIANCE + " Alliance");
-        telemetry.addData("Config", configs.AUTO_DELAY + " Sec. Delay");
+        //telemetry.addData("Config", configs.AUTO_DELAY + " Sec. Delay");
         telemetry.addData("Config","Initialization Complete!");
         telemetry.update();
 
         waitForStart();
 
         //Wait for alliance moves or to avoid penalty for early cross
-        telemetry.addData("Status", "Delay before driving ...");
-        telemetry.update();
+        //telemetry.addData("Status", "Delay before driving ...");
+        //telemetry.update();
 
-        sleep(configs.AUTO_DELAY * 1000);
+        //sleep(configs.AUTO_DELAY * 1000);
 
-        telemetry.addData("Status", "Delay Complete!");
-        telemetry.update();
+        //telemetry.addData("Status", "Delay Complete!");
+        //telemetry.update();
         //sleep(TimeDebugSleep);
 
         if(configs.ALLIANCE.equals("BLUE"))
@@ -72,9 +72,9 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
             Direction = -1;
         }
 
-        //Drive to the wall, slowing for the last 6 inches
+        //Drive to the wall
         //cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
-        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction, configs.DIST_SHORT_TO_WALL*Direction, 5.0);
+        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL * Direction, configs.DIST_SHORT_TO_WALL * Direction, 5.0);
         //sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
@@ -95,7 +95,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         sleep(TimeDebugSleep);
 
         //Drive to first beacon
-        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1*Direction, configs.DIST_RAMP_TO_BEACON_1*Direction, 5.0);
+        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1 * Direction, configs.DIST_RAMP_TO_BEACON_1 * Direction, 5.0);
         sleep(TimeDebugSleep);
 
         cmds.StopDriving();
@@ -117,21 +117,21 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         sleep(TimeDebugSleep);
 
         //Drive to corner position
-        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_BEACON2_TO_CORNER*Direction, configs.DIST_BEACON2_TO_CORNER*Direction, 5.0);
+        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_BEACON2_TO_CORNER * Direction, configs.DIST_BEACON2_TO_CORNER * Direction, 5.0);
         //sleep(250); //pause for momentum
         //sleep(TimeDebugSleep);
 
         //Turn to face center
         //For RED, turn another 90 degrees
-        if(configs.ALLIANCE.equals("BLUE"))
-        {
-            cmds.EncoderTurn("R", configs.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
-        }
-        else
+        if(configs.ALLIANCE.equals("RED"))
         {
             cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN + configs.INCHES_NINETY_DEGREE_TURN,5.0);
         }
-        //sleep(250); //pause for momentum
+        else
+        {
+            cmds.EncoderTurn("R", configs.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
+        }
+        sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
         //Move close enough to shoot balls
@@ -153,7 +153,7 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         //sleep(TimeDebugSleep);
 
         //Drive to center
-        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_CORNER_TO_PARK, configs.DIST_CORNER_TO_PARK, 5.0);
+        cmds.EncoderDrive(configs.POWER_DRIVE, 72 - configs.DIST_CORNER_TO_SHOOT, 72 - configs.DIST_CORNER_TO_SHOOT, 5.0);
         //sleep(TimeDebugSleep);
 
         cmds.StopDriving();

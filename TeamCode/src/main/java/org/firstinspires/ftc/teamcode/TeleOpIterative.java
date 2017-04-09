@@ -77,9 +77,9 @@ public class TeleOpIterative extends OpMode
         telemetry.update();
 
         //Give buttons a variable name
-            LeftFY = -gamepad1.left_stick_y;
+            //LeftFY = -gamepad1.left_stick_y;
             LeftBY = -gamepad1.left_stick_y;
-            RightFY = -gamepad1.right_stick_y;
+            //RightFY = -gamepad1.right_stick_y;
             RightBY = -gamepad1.right_stick_y;
 
             Collect = gamepad1.right_trigger -gamepad1.left_trigger;
@@ -112,20 +112,34 @@ public class TeleOpIterative extends OpMode
         //    robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
         //}
 
-        //Alternate driver
-        if (gamepad2.b)
+        if (gamepad1.left_bumper)
         {
-            robot.sensorColor.enableLed(true);
+            robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
         }
         else
         {
-            robot.sensorColor.enableLed(false);
+            robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
         }
+        //Alternate driver
+        if (gamepad2.b)
+        {
+        //    robot.sensorColor.enableLed(true);
+            robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
+        }
+        //else
+        //{
+        //    robot.sensorColor.enableLed(false);
+        //}
 
         if (gamepad2.left_bumper)
         {
             //robot.servoLift.setPosition(configs.POS_CLOSED_LIFT_SERVO);
-            robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
+            //robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
+            robot.motorLaunch.setPower(-configs.POWER_LAUNCH);
+        }
+        else
+        {
+            robot.motorLaunch.setPower(0);
         }
 
         if (gamepad2.right_bumper)

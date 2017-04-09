@@ -73,20 +73,20 @@ public class TEST_Distance extends LinearOpMode
             case "PUSHER":
                 //Test push servo
                 cmds.ExtendPusher();
-                sleep(1500);
+                //sleep(1500);
                 cmds.RetractPusher();
-                sleep(1500);
+                //sleep(1500);
                 break;
             case "SENSE":
                 //Test sense beacon
                 cmds.SenseBeacon();
                 break;
             case "SHOOT":
-                robot.motorLaunch.setPower(configs.POWER_LAUNCH);
-                sleep(2000);
-                robot.motorCollect.setPower(1.0);
+                //robot.motorLaunch.setPower(configs.POWER_LAUNCH);
+                //sleep(2000);
+                //robot.motorCollect.setPower(1.0);
                 cmds.Shoot();   //robot);
-                robot.motorCollect.setPower(0);
+                //robot.motorCollect.setPower(0);
                 break;
         }
 
