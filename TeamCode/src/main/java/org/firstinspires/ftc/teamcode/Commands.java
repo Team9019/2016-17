@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 /*
 PURPOSE:
     Define all movement commands
+
 */
 
 public class Commands
@@ -124,7 +125,7 @@ public class Commands
                     )
             {
                 //wait 6 seconds before determining whether to drive forward again (wrong color)
-                opMode.sleep(1500);
+                //opMode.sleep(1500);
 
                 ExtendPusher();
                 //opMode.sleep(1500);
