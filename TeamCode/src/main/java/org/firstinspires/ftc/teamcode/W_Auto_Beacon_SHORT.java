@@ -95,7 +95,14 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         sleep(TimeDebugSleep);
 
         //Drive to first beacon
-        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1 * Direction, configs.DIST_RAMP_TO_BEACON_1 * Direction, 5.0);
+        if(configs.ALLIANCE.equals("RED")){
+            cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1 * Direction, configs.DIST_RAMP_TO_BEACON_1 * Direction, 5.0);
+
+        }
+        else {
+            cmds.EncoderDrive(configs.POWER_APPROACH, (configs.DIST_RAMP_TO_BEACON_1-1) * Direction, (configs.DIST_RAMP_TO_BEACON_1-1) * Direction, 5.0);
+
+        }
         sleep(TimeDebugSleep);
 
         cmds.StopDriving();
@@ -116,8 +123,13 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         cmds.SenseBeacon();
         sleep(TimeDebugSleep);
 
+
+        cmds.EncoderDrive(configs.POWER_APPROACH, 6 * Direction, 6 * Direction, 5.0);
+
+        cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
+
         //Drive to corner position
-        cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_BEACON2_TO_CORNER * Direction, configs.DIST_BEACON2_TO_CORNER * Direction, 5.0);
+        cmds.EncoderDrive(configs.POWER_APPROACH, (configs.DIST_BEACON2_TO_CORNER-6) * Direction, (configs.DIST_BEACON2_TO_CORNER-6) * Direction, 5.0);
         //sleep(250); //pause for momentum
         //sleep(TimeDebugSleep);
 
@@ -125,12 +137,13 @@ public class W_Auto_Beacon_SHORT extends LinearOpMode
         //For RED, turn another 90 degrees
         if(configs.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN + configs.INCHES_NINETY_DEGREE_TURN,5.0);
+            //cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN + configs.INCHES_NINETY_DEGREE_TURN,5.0);
+            cmds.EncoderTurn("R", configs.INCHES_NINETY_DEGREE_TURN,5.0);
         }
-        else
-        {
-            cmds.EncoderTurn("R", configs.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
-        }
+        //else
+        //{
+        //    cmds.EncoderTurn("R", configs.INCHES_FORTYFIVE_DEGREE_TURN, 5.0);
+        //}
         sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 

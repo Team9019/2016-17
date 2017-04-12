@@ -39,7 +39,7 @@ public class Commands
 
             //{
             robot.servoPusher.setPosition(Configuration.POS_OUT_PUSHER_SERVO);
-            opMode.sleep(2000);
+            opMode.sleep(3500);
             //Thread.sleep(2000);
             //}
             //catch (InterruptedException e)
@@ -61,7 +61,7 @@ public class Commands
             //try
             //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-            opMode.sleep(2000);
+            opMode.sleep(3500);
             //Thread.sleep(2000);
             //}
             //catch (InterruptedException e)
@@ -95,9 +95,10 @@ public class Commands
                 runtime.seconds() < 7
                 )
         {
-            //opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-            //opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-            //opMode.telemetry.update();
+            opMode.telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            opMode.telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            opMode.telemetry.update();
+            opMode.sleep(1000);
 
             //Test for RED
             if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
@@ -105,18 +106,18 @@ public class Commands
                 RedFound = true;
                 opMode.telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
                 opMode.telemetry.update();
-                robot.devIM.setLED(1,true);     //Red
+                //robot.devIM.setLED(1,true);     //Red
             }
-            //else
-            //{
+            else
+            {
                 //Test for BLUE
                 if (robot.sensorColor.blue() >= Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue() <= Configuration.COLOR_BLUE_HIGH) {
                     BlueFound = true;
                     opMode.telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
                     opMode.telemetry.update();
-                    robot.devIM.setLED(0, true);    //Blue
+                    //robot.devIM.setLED(0, true);    //Blue
                 }
-            //}
+            }
 
             //If beacon is the wrong color wait then push the button.
             //If beacon is the correct color, turn off searching to allow moving on
