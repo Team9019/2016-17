@@ -145,6 +145,68 @@ public class Commands
         opMode.telemetry.update();
     }
 
+    public void SenseBeaconButtons()
+    {
+        boolean Searching = true;
+        boolean BlueFound = false;
+        boolean RedFound = false;
+        double RemDistance = 0;
+
+        opMode.telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
+        opMode.telemetry.update();
+
+        RemDistance = Configuration.DIST_BEACON1_TO_BEACON_2;
+
+        //test color of first button
+
+        //Test for RED
+        if (robot.sensorColor.red()>=Configuration.COLOR_RED_LOW && robot.sensorColor.red()<=Configuration.COLOR_RED_HIGH)
+        {
+            RedFound = true;
+        }
+        else
+        {
+            //Test for BLUE
+            if (robot.sensorColor.blue() >= Configuration.COLOR_BLUE_LOW && robot.sensorColor.blue() <= Configuration.COLOR_BLUE_HIGH) {
+                BlueFound = true;
+            }
+        }
+
+        //if button <> alliance
+        if (    (   (RedFound) && (Configuration.ALLIANCE.equals("BLUE"))) |
+                (   (BlueFound) && (Configuration.ALLIANCE.equals("RED")))
+                )
+        {
+            //  drive 5 inches
+            if (Configuration.ALLIANCE.equals("RED"))
+            {
+                EncoderDrive(Configuration.POWER_APPROACH, 5 , 5, 5.0);
+            }
+            else
+            {
+                EncoderDrive(Configuration.POWER_APPROACH, -5 , -5, 5.0);
+            }
+            RemDistance = RemDistance - 5;
+        }
+
+        //  press
+        ExtendPusher();
+        RetractPusher();
+
+        //drive beacon to beacon minus 5
+        if (Configuration.ALLIANCE.equals("RED"))
+        {
+                EncoderDrive(Configuration.POWER_DRIVE, RemDistance , RemDistance, 5.0);
+        }
+        else
+        {
+                EncoderDrive(Configuration.POWER_DRIVE, -RemDistance , -RemDistance, 5.0);
+        }
+
+        opMode.telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
+        opMode.telemetry.update();
+    }
+
     public void EncoderDrive(double speed,
                              double leftInches, double rightInches,
                              double timeoutS)
