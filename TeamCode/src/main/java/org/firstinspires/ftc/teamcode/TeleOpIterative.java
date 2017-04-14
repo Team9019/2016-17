@@ -84,7 +84,7 @@ public class TeleOpIterative extends OpMode
 
             Collect = gamepad1.right_trigger -gamepad1.left_trigger;
 
-            LaunchY = gamepad2.right_stick_y;
+            //LaunchY = gamepad2.right_stick_y;
             LiftY = gamepad2.left_stick_y;
 
         //Apply button settings to robot
@@ -137,15 +137,10 @@ public class TeleOpIterative extends OpMode
             //robot.servoTusk.setPosition(configs.POS_CLOSED_TUSK_SERVO);
             robot.motorLaunch.setPower(-configs.POWER_LAUNCH);
         }
-        else
-        {
-            robot.motorLaunch.setPower(0);
-        }
-
-        if (gamepad2.right_bumper)
+        else if (gamepad2.right_bumper)
         {
             robot.motorLaunch.setPower(configs.POWER_LAUNCH);
-        }
+         }
         else
         {
             robot.motorLaunch.setPower(0);
