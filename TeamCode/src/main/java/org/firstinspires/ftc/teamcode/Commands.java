@@ -61,7 +61,7 @@ public class Commands
             //try
             //{
             robot.servoPusher.setPosition(Configuration.POS_IN_PUSHER_SERVO);
-            opMode.sleep(3500);
+            opMode.sleep(2500);
             //Thread.sleep(2000);
             //}
             //catch (InterruptedException e)

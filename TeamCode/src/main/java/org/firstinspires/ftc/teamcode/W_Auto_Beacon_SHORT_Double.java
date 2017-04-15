@@ -59,29 +59,37 @@ public class W_Auto_Beacon_SHORT_Double extends LinearOpMode
         }
 
         //Drive to the wall
-        cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL * Direction, configs.DIST_SHORT_TO_WALL * Direction, 5.0);
+        //cmds.EncoderDrive(configs.POWER_DRIVE, configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), configs.DIST_SHORT_TO_WALL*Direction - (6*Direction), 5.0);
+        if(configs.ALLIANCE.equals("RED")) {
+            cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_SHORT_TO_WALL * Direction, configs.DIST_SHORT_TO_WALL * Direction, 5.0);
+        }
+        else {
+            cmds.EncoderDrive(configs.POWER_APPROACH, (configs.DIST_SHORT_TO_WALL-3.5) * Direction, (configs.DIST_SHORT_TO_WALL -3.5) * Direction, 5.0);
+        }
         //sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
         //Turn to face beacon
+        //cmds.EncoderDrive(robot, Configuration.POWER_DRIVE, Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, -Configuration.INCHES_FORTYFIVE_DEGREE_TURN*Sign, 5.0);
         if(configs.ALLIANCE.equals("RED"))
         {
             cmds.EncoderTurn("R",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
         }
         else //BLUE
         {
-            cmds.EncoderTurn("L",configs.INCHES_FORTYFIVE_DEGREE_TURN,5.0);
+            cmds.EncoderTurn("L",configs.INCHES_FORTYFIVE_DEGREE_TURN + 2, 5.0);
         }
         sleep(250); //pause for momentum
         sleep(TimeDebugSleep);
 
-        //Drive to first beacon, first button
+//Drive to first beacon
         if(configs.ALLIANCE.equals("RED")){
             cmds.EncoderDrive(configs.POWER_APPROACH, configs.DIST_RAMP_TO_BEACON_1 * Direction, configs.DIST_RAMP_TO_BEACON_1 * Direction, 5.0);
+
         }
-        else
-        {   //For BLUE ALLIANCE, the turn isn't as tight so the drive distance from the ramp to the beacon is less
-            cmds.EncoderDrive(configs.POWER_APPROACH, (configs.DIST_RAMP_TO_BEACON_1-1) * Direction, (configs.DIST_RAMP_TO_BEACON_1-1) * Direction, 5.0);
+        else {
+            cmds.EncoderDrive(configs.POWER_APPROACH, (configs.DIST_RAMP_TO_BEACON_1 + 1) * Direction, (configs.DIST_RAMP_TO_BEACON_1 +1) * Direction, 5.0);
+
         }
         sleep(TimeDebugSleep);
 
